@@ -193,6 +193,7 @@ $result = mysqli_query($conn, $sql);
         }
 
         .container {
+            height:auto;
             width: 100%;
             margin: 0 auto;
             padding-top: 20px;
@@ -283,74 +284,55 @@ $result = mysqli_query($conn, $sql);
         }
 
         .container_3 {
-            height: 610px;
+            height: auto;
             /* Độ cao của div container */
             display: flex;
             /* Sử dụng flexbox để dễ dàng chia layout */
+            background-color: black;
+            position: relative;
         }
-
-        .left {
-            flex: 1;
-            /* Chiếm toàn bộ phần còn lại của container */
-            background-color: pink;
-            /* Màu nền cho div left */
-            margin-left: 30px;
-            /* Khoảng cách từ div right đến div left */
+        .container_3 img {
+            width: 100%;
+            height: auto;
         }
+        .text-container {
+            
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%; /* Đảm bảo văn bản nằm giữa ngang */
+}
 
-        .right {
-            flex: 1;
-            /* Chiếm toàn bộ phần còn lại của container */
-            display: flex;
-            /* Sử dụng flexbox để chia layout bên trong div right */
-            flex-direction: column;
-            /* Chia layout theo chiều dọc */
-            margin-right: 30px;
-            /* Khoảng cách từ div left đến div right */
-        }
-
-        .top-right,
-        .bottom-right {
-            flex: 1;
-            /* Mỗi div chiếm 50% chiều cao của div right */
-        }
-
-        .top-right {
-            background-color: pink;
-            /* Màu nền cho div top-right */
-        }
-
-        .bottom-right {
-            background-color: pink;
-            /* Màu nền cho div bottom-right */
-        }
-
-        .inner-div {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-            /* Chiều cao của inner-div bằng với div right */
-        }
-
-        .inner-content {
-            padding: 20px;
-            /* Khoảng cách từ nội dung đến viền */
-            width: 80%;
-            /* Chiếm 70% tổng của inner-div */
-            height: 80%;
-            margin-right: 70px;
-        }
-
-        .inner-content_1 {
-            padding: 20px;
-            /* Khoảng cách từ nội dung đến viền */
-            width: 80%;
-            /* Chiếm 70% tổng của inner-div */
-            height: 90%;
-            margin-left: 70px;
-        }
-
+.text-container h3 {
+    
+    margin: 0; /* Loại bỏ margin mặc định */
+    color: white; /* Màu văn bản */
+    font-family: "Times New Roman", Times, serif; 
+    font-weight: bold; /* Đậm */
+    text-transform: uppercase; /* Chuyển đổi văn bản thành chữ in hoa */
+}
+.text-container h4 {
+    margin: 0; /* Loại bỏ margin mặc định */
+    color: white; /* Màu văn bản */
+    font-family: "Times New Roman", Times, serif; 
+    font-weight: bold; /* Đậm */
+    text-transform: uppercase; /* Chuyển đổi văn bản thành chữ in hoa */
+}
+.text-container h2 {
+    margin: 0; /* Loại bỏ margin mặc định */
+    color: white; /* Màu văn bản */
+    font-family: "Times New Roman", Times, serif; 
+    font-weight: bold; /* Đậm */
+    text-transform: uppercase; /* Chuyển đổi văn bản thành chữ in hoa */
+}
+.text-container p {
+    margin: 0; /* Loại bỏ margin mặc định */
+    color: white; /* Màu văn bản */
+    font-family: "Times New Roman", Times, serif; 
+    text-transform: uppercase; /* Chuyển đổi văn bản thành chữ in hoa */
+}
         .container_4 {
             display: flex;
             height: 230px;
@@ -368,9 +350,12 @@ $result = mysqli_query($conn, $sql);
 
         .End {
             background-color: #e6e6e6;
-            height: 70px;
+            height: auto;
             margin-left: 70px;
             margin-right: 70px;
+        }
+        .footer{
+            height: auto;
         }
         
     </style>
@@ -537,36 +522,26 @@ $result = mysqli_query($conn, $sql);
     <br>
     <p style="font-size: 30px;margin-left: 35px;">Spotlight on…</p>
     <div class="container_3">
-        <div class="left">
-            <div class="inner-div">
-                <div class="inner-content_1">
-                    <img class="image" src="https://legohouse.com/media/2qmeubw1/kimmi-pose-03.png?width=350&quality=90" alt="">
-                    <p style="text-align:center;font-size:25px;">Discover endless worlds to create</p>
-                </div>
-            </div>
-        </div>
-        <div class="right">
-            <div class="top-right">
-                <div class="inner-div">
-                    <div class="inner-content">
-                        <img class="image" src="https://media-api.advertisingvietnam.com/oapi/v1/media?uuid=433d57b6-f805-47d5-98b9-e243073f0320&resolution=1440x756&type=image" alt="">
-                    </div>
-                </div>
-            </div>
-            <div class="bottom-right">
-                <div class="inner-div">
-                    <div class="inner-content">
-                        <img class="image" src="https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2014/02/281537-critica-lego-pelicula.jpg?tf=3840x" alt="">
-                    </div>
-                </div>
-            </div>
+        <img src="https://www.lego.com/cdn/cs/set/assets/blt684048c4fb6edf33/21348-Exclusive-202404-Homepage-SL-Hero-Standard-Large.jpg?fit=crop&format=webply&quality=80&width=1600&height=500&dpr=1.5" alt="">
+        <div class="text-container">
+        <h3>Dungeons</h3>
+        <h4>& Dragon</h4>
+        <br>
+        <h2>Build an adventure like </h2>
+        <h2>never before</h2>
+        <br>
+        <p>Start an epic quest with new Dungeons & Dragons:</p>
+        <p>Red Dragon’s Tale.</p>
+        <a href="ninjago.php" style="position: absolute; top: 150%; right: 44%; transform: translateY(-50%); background-color: red; color: white; padding: 10px 40px; text-decoration: none; border-radius: 5px;">See More</a>
         </div>
     </div>
     <br>
+    <div>
     <h4 style="text-align: center;font-size: 30px;">Find inspiration, share your creation</h4>
     <p style="text-align: center;">Post your photos to Instagram and mention @LEGO in the caption for a chance to be
         featured on the</p>
     <p style="text-align: center;">website and shop the sets you like below.</p>
+    </div>
     <br>
     <div class="container_4">
         <div class="column_4"><img  class="image" src="https://www.lego.com/cdn/cs/set/assets/blteb6d782e63fd9de2/10280_Block_Standard_3.jpg?fit=crop&format=jpg&quality=80&width=635&height=440&dpr=1" alt=""></div>
@@ -575,10 +550,7 @@ $result = mysqli_query($conn, $sql);
         <div class="column_4"><img class="image" src="https://www.lego.com/cdn/cs/set/assets/blta36ab46b5a372960/HERO_Mobile.jpg?fit=crop&format=webply&quality=80&width=635&height=440&dpr=1.5" alt=""></div>
     </div>
     <br>
-    <div style="text-align: center;">
-        <button type="button" class="btn btn-secondary rounded-pill">Shop now ></button>
-    </div>
-    <br>
+    
     <div class="End">
         <p style="margin-left: 30px;margin-right: 30px;text-align: center;justify-content: center;">Welcome to the
             Official LEGO® Shop, the amazing home of LEGO building toys, gifts, stunning display sets and more for kids
@@ -590,7 +562,7 @@ $result = mysqli_query($conn, $sql);
     </div>
     <br>
 </body>
-<footer >
+<div class="footer">
     <hr style="border:1px solid black;">
 <br>
         <div class="container" style="background-color:white;row row-cols-3">
@@ -618,5 +590,5 @@ $result = mysqli_query($conn, $sql);
         referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
      </div>      
-</footer>
+</div>
 </html>
