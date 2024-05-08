@@ -283,7 +283,7 @@ $result = mysqli_query($conn, $sql);
         }
 
         .container_3 {
-            height: 610px;
+            height: auto;
             /* Độ cao của div container */
             display: flex;
             /* Sử dụng flexbox để dễ dàng chia layout */
@@ -541,7 +541,7 @@ $result = mysqli_query($conn, $sql);
             <div class="inner-div">
                 <div class="inner-content_1">
                     <img class="image" src="https://legohouse.com/media/2qmeubw1/kimmi-pose-03.png?width=350&quality=90" alt="">
-                    <p style="text-align:center;font-size:25px;">Discover endless worlds to create</p>
+                    <!-- <p style="text-align:center;font-size:25px;">Discover endless worlds to create</p> -->
                 </div>
             </div>
         </div>
