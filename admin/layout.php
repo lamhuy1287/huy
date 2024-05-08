@@ -51,6 +51,12 @@
           Trang khách hàng
         </a>
       </li>
+      <li>
+        <a href="./manager_admin/showInfo.php" class="nav-link text-white">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
+          Trang Quản Lý admin
+        </a>
+      </li>
     </ul>
     
   </div>
