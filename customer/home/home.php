@@ -522,6 +522,7 @@ $result = mysqli_query($conn, $sql);
     <br>
     <p style="font-size: 30px;margin-left: 35px;">Spotlight on…</p>
     <div class="container_3">
+<<<<<<< HEAD
         <img src="https://www.lego.com/cdn/cs/set/assets/blt684048c4fb6edf33/21348-Exclusive-202404-Homepage-SL-Hero-Standard-Large.jpg?fit=crop&format=webply&quality=80&width=1600&height=500&dpr=1.5" alt="">
         <div class="text-container">
         <h3>Dungeons</h3>
@@ -533,6 +534,31 @@ $result = mysqli_query($conn, $sql);
         <p>Start an epic quest with new Dungeons & Dragons:</p>
         <p>Red Dragon’s Tale.</p>
         <a href="ninjago.php" style="position: absolute; top: 150%; right: 44%; transform: translateY(-50%); background-color: red; color: white; padding: 10px 40px; text-decoration: none; border-radius: 5px;">See More</a>
+=======
+        <div class="left">
+            <div class="inner-div">
+                <div class="inner-content_1">
+                    <img class="image" src="https://legohouse.com/media/2qmeubw1/kimmi-pose-03.png?width=350&quality=90" alt="">
+                    <!-- <p style="text-align:center;font-size:25px;">Discover endless worlds to create</p> -->
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <div class="top-right">
+                <div class="inner-div">
+                    <div class="inner-content">
+                        <img class="image" src="https://media-api.advertisingvietnam.com/oapi/v1/media?uuid=433d57b6-f805-47d5-98b9-e243073f0320&resolution=1440x756&type=image" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="bottom-right">
+                <div class="inner-div">
+                    <div class="inner-content">
+                        <img class="image" src="https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2014/02/281537-critica-lego-pelicula.jpg?tf=3840x" alt="">
+                    </div>
+                </div>
+            </div>
+>>>>>>> c7190c0594a5cb3cfdf1cabc16e5ed81f2bab541
         </div>
     </div>
     <br>
