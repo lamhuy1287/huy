@@ -380,9 +380,11 @@ $result = mysqli_query($conn, $sql);
                 </p>
             </div>
             <div class="a3">
-                <button type="button" class="btn btn-outline btn-login" onclick="window.location.href = 'login.html';">
-                    <i class='bx bxs-user'></i> Login
-                </button>
+                <a href="../../admin/login_logout/login.php">
+                    <button type="button" class="btn btn-outline btn-login" onclick="window.location.href = 'login.html';">
+                        <i class='bx bxs-user'></i> Login
+                    </button>
+                </a>
                 | Join LEGO® Insiders
             </div>
         </div>

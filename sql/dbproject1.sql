@@ -47,3 +47,15 @@ select * from products where themes='dreamzzz';
 SELECT COUNT(*) AS total_count
 FROM products
 WHERE themes = 'ninjago';
+
+
+-- tạo đăng nhập với bên admin
+
+CREATE TABLE user_admin(
+	id INT(11) PRIMARY KEY AUTO_INCREMENT,
+	email VARCHAR(50) NOT NULL,
+	user_name VARCHAR(50) NOT NULL,
+	pass_word VARCHAR(100) NOT NULL,
+	status TINYINT(4),
+	created_time INT(11)
+);

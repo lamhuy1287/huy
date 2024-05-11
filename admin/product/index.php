@@ -68,6 +68,12 @@ $result = mysqli_query($conn, $sql);
           Trang khách hàng
         </a>
       </li>
+      <li>
+        <a href="../../admin/login_logout/logout.php" class="nav-link text-black">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
+          Log out
+        </a>
+      </li>
     </ul>
     
    </div>
