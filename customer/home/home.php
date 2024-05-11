@@ -31,6 +31,7 @@ $result = mysqli_query($conn, $sql);
         *{
             box-sizing: border-box;
         }
+       
         .header {
             height: 130px;
             width: 100%;
@@ -202,6 +203,7 @@ $result = mysqli_query($conn, $sql);
             justify-content: space-between;
         }
         .product {
+            height: auto;
             width: 18%;
             background-color: white;
             margin-bottom: 20px;
@@ -219,9 +221,10 @@ $result = mysqli_query($conn, $sql);
         }
         .name{
             margin-top: 10px;
-            height:10%;
+            height:15%;
         }
         .price {
+            height:10%;
             margin-top: 10px;
             font-weight: bold;
             color: #333;
@@ -230,6 +233,7 @@ $result = mysqli_query($conn, $sql);
             
         }
         .orange-button {
+            height:25;
             width: 100%;
   background-color: orange; /* Màu nền của button */
   border: 2px solid orange; /* Màu viền và độ dày viền */
@@ -335,7 +339,7 @@ $result = mysqli_query($conn, $sql);
 }
         .container_4 {
             display: flex;
-            height: 230px;
+            height: auto;
         }
 
         .column_4 {
@@ -349,10 +353,12 @@ $result = mysqli_query($conn, $sql);
         }
 
         .End {
+            display:flex;
             background-color: #e6e6e6;
             height: auto;
-            margin-left: 70px;
-            margin-right: 70px;
+            margin-top:20px;
+            margin-left: 10%;
+            margin-right: 10%;
         }
         .footer{
             height: auto;
@@ -551,9 +557,8 @@ $result = mysqli_query($conn, $sql);
         <div class="column_4"><img  class="image" src="https://www.lego.com/cdn/cs/set/assets/bltba80026c04e00dd2/240123_Design_brief_Article_assets_Roots_Card_Content.jpg?fit=crop&format=webply&quality=80&width=635&height=440&dpr=1.5" alt=""></div>
         <div class="column_4"><img class="image" src="https://www.mykingdom.com.vn/cdn/shop/articles/mykingdom-do-choi-lap-rap-lego-creator-image.jpg?v=1686020279" alt=""></div>
         <div class="column_4"><img class="image" src="https://www.lego.com/cdn/cs/set/assets/blta36ab46b5a372960/HERO_Mobile.jpg?fit=crop&format=webply&quality=80&width=635&height=440&dpr=1.5" alt=""></div>
-    </div>
     <br>
-    
+    </div>  
     <div class="End">
         <p style="margin-left: 30px;margin-right: 30px;text-align: center;justify-content: center;">Welcome to the
             Official LEGO® Shop, the amazing home of LEGO building toys, gifts, stunning display sets and more for kids

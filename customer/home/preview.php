@@ -227,11 +227,13 @@ $result_product = mysqli_query($conn, $sql_product);
   color: orange; /* Màu chữ khi hover */
   }
    
-        .End {
+  .End {
+            display:flex;
             background-color: #e6e6e6;
-            height: 100px;
-            margin-left: 70px;
-            margin-right: 70px;
+            height: auto;
+            margin-top:20px;
+            margin-left: 10%;
+            margin-right: 10%;
         }
        
 </style>
@@ -343,7 +345,7 @@ $result_product = mysqli_query($conn, $sql_product);
 </div>
 <br>
 <h2 style="text-align:center;">Sản phẩm tương ứng</h2>
-<br>
+
     <div class="End">
         <p style="margin-left: 30px;margin-right: 30px;text-align: center;justify-content: center;">Welcome to the
             Official LEGO® Shop, the amazing home of LEGO building toys, gifts, stunning display sets and more for kids
