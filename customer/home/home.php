@@ -403,6 +403,10 @@ $result = mysqli_query($conn, $sql);
                             echo '<a href="../../admin/login_logout/login.php">';
                             echo "Login";
                             echo "</a>";
+                            echo "|";
+                            echo '<a href="../registerCustomer/registerCustomer.php">';
+                            echo "Sign up";
+                            echo "</a>";
                         } ?>
                     <!-- </button> -->
                 <!-- </a> -->
