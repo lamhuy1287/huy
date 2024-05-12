@@ -1,4 +1,5 @@
 <?php
+session_start();
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -380,11 +381,31 @@ $result = mysqli_query($conn, $sql);
                 </p>
             </div>
             <div class="a3">
-                <a href="../../admin/login_logout/login.php">
-                    <button type="button" class="btn btn-outline btn-login" onclick="window.location.href = 'login.html';">
-                        <i class='bx bxs-user'></i> Login
-                    </button>
-                </a>
+                <!-- <a href="../../admin/login_logout/login.php"> -->
+                    <!-- <button type="button" class="btn btn-outline btn-login" onclick="window.location.href = 'login.html';"> -->
+                        <i class='bx bxs-user'></i> <?php
+                        if(isset($_SESSION["admin"])){
+                            echo '<a href = "../../admin/manager_admin/showInfo.php">';
+                            echo $_SESSION["admin"];
+                            echo "</a>";
+                        }
+                        else if(isset($_SESSION["customer"])){
+                            echo '<a href = "">';
+                            echo $_SESSION["customer"];
+                            echo "</a>";
+                            echo "|";
+                            echo '<a href = "../../admin/login_logout/logout.php">';
+                            echo 'Logout';
+                            echo "</a>";
+                            
+                        }
+                        else{
+                            echo '<a href="../../admin/login_logout/login.php">';
+                            echo "Login";
+                            echo "</a>";
+                        } ?>
+                    <!-- </button> -->
+                <!-- </a> -->
                 | Join LEGO® Insiders
             </div>
         </div>

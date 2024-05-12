@@ -1,5 +1,8 @@
 <?php
-
+session_start();
+if(!isset($_SESSION["admin"])){
+    header("location:../login_logout/login.php");
+}
 $servername = "localhost";
 $username = "root";
 $password = "";

@@ -27,7 +27,7 @@ if (!$conn) {
   die("Kết nối thất bại: " . mysqli_connect_error());
 }
 $time = time();
-$sql = "insert into user_admin values (null,'$email','$user_name','$pass_word',$status,$time)";
+$sql = "insert into user_admin values (null,'$email','$user_name',md5('$pass_word'),$status,$time)";
 // echo $sql;
 if ($conn->query($sql) === TRUE) {
     // echo "New record created successfully";

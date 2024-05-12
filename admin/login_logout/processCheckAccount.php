@@ -20,8 +20,10 @@ $conn = mysqli_connect($servername, $username, $password, $database);
 if (!$conn) {
   die("Kết nối thất bại: " . mysqli_connect_error());
 }
-$sql = "SELECT * FROM user_admin WHERE email='$email' and pass_word='$pass_word';";
-// echo $sql; exit;
+
+$sql = "SELECT * FROM user_admin WHERE email='$email' and pass_word= MD5('$pass_word');";
+
+  // echo $sql; exit;
 $result = $conn->query($sql);
 
 
@@ -32,10 +34,22 @@ if ($result->num_rows == 1) {
     // }
     // echo "Login Successfully";
     $row = $result->fetch_assoc();
-    session_start();
     $_SESSION["admin"] =  $row["email"];
+    // echo $_SESSION["admin"] ;exit();
     header("location:../manager_admin/showInfo.php");
-  } else {
+  }
+  
+  $sql = "SELECT * FROM customers WHERE email='$email' and password= MD5('$pass_word');";
+  //  echo $sql; exit();
+  $result = $conn->query($sql);
+  if($result->num_rows == 1){
+    $row = $result->fetch_assoc();
+    $_SESSION["customer"] = $row['email'];
+    // echo $_SESSION["customer"] ;exit();
+    header("location:../../customer/home/home.php");
+  }
+  // echo $sql; exit();  
+  else {
     $_SESSION["Check"] = false; 
     header("location:./login.php");
   }
