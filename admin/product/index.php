@@ -80,7 +80,7 @@ $result = mysqli_query($conn, $sql);
 <!-- CONTENT -->
   <div class="container">
     <div class="container">
-        <a class="btn btn-warning my-3"  href="/doAn/admin/product/create.php">Thêm sản phẩm mới</a>
+        <a class="btn btn-warning my-3"  href="/doan1/huy/admin/product/create.php">Thêm sản phẩm mới</a>
         <table class="table table-bordered" id="product_table">
             <thead>
                 <tr>
