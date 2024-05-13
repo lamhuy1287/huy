@@ -240,9 +240,31 @@ $total_pages = ceil($total_rows / $items_per_page);
                 </p>
             </div>
             <div class="a3">
-                <button type="button" class="btn btn-outline btn-login" onclick="window.location.href = 'login.html';">
-                    <i class='bx bxs-user'></i> Login
-                </button>
+            <i class='bx bxs-user'></i> <?php
+                        if(isset($_SESSION["admin"])){
+                            echo '<a href = "../../admin/manager_admin/showInfo.php">';
+                            echo $_SESSION["admin"];
+                            echo "</a>";
+                        }
+                        else if(isset($_SESSION["customer_name"])){
+                            echo '<a href = "">';
+                            echo $_SESSION["customer_name"];
+                            echo "</a>";
+                            echo "|";
+                            echo '<a href = "../../admin/login_logout/logout.php">';
+                            echo 'Logout';
+                            echo "</a>";
+                            
+                        }
+                        else{
+                            echo '<a style="color:black" href="../../admin/login_logout/login.php">';
+                            echo "Login";
+                            echo "</a>";
+                            // echo "|";
+                            // echo '<a href="../registerCustomer/registerCustomer.php">';
+                            // echo "Sign up";
+                            // echo "</a>";
+                        } ?>
                 | Join LEGO® Insiders
             </div>
         </div>
