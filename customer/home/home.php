@@ -4,7 +4,9 @@ $servername = "localhost";
 $username = "root";
 $password = "";
 $database = "project1";
-
+if(isset($_GET['search'])){
+    header("Location:product.php?search=".$_GET['search']);
+}
 // Create connection
 $conn = mysqli_connect($servername, $username, $password, $database);
 
@@ -441,8 +443,8 @@ $result = mysqli_query($conn, $sql);
         </script>
             </div>
             <div class="b2">
-                <form action="" id="search-box">
-                    <input type="text" id="search-text" placeholder="Tìm kiếm sản phẩm" required>
+                <form action="product.php" id="search-box" method="Get">
+                    <input name="search" type="text" id="search-text" placeholder="Tìm kiếm sản phẩm" required>
                     <button id="search-btn"><i  class='bx bx-search'></i></button>
                 </form>
                 <button style="background-color: rgb(252,188,56);border: none;" type="button" class="btn btn-light"><i
