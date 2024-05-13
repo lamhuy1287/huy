@@ -455,7 +455,7 @@ $result = mysqli_query($conn, $sql);
 
 
     <div class="banner" style="position: relative;">
-    <img src="https://collider.com/wp-content/uploads/2017/09/lego-ninjago-movie-illustration-banner.jpg" alt="">
+    <img src="https://collider.com/wp-content/uploads/2017/09/lego-ninjago-movie-illustration-banner.jpg" alt="" style="width: 100%;">
     <a href="ninjago.php" style="position: absolute; top: 90%; right: 70px; transform: translateY(-50%); background-color: rgb(252,188,56); color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">See More</a>
 </div>
 
