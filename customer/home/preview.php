@@ -1,4 +1,5 @@
 <?php
+session_start();
 $product_id = $_POST['product_id'];
 
 #kết nối cơ sở dữ liệu
