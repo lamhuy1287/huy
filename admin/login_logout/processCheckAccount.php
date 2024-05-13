@@ -45,6 +45,8 @@ if ($result->num_rows == 1) {
   if($result->num_rows == 1){
     $row = $result->fetch_assoc();
     $_SESSION["customer"] = $row['email'];
+    $_SESSION["customer_name"] = $row['name'];
+    // echo $_SESSION["customer_name"]; exit();
     // echo $_SESSION["customer"] ;exit();
     header("location:../../customer/home/home.php");
   }

@@ -6,6 +6,7 @@ if(isset($_SESSION["admin"])){
 }
 if(isset($_SESSION["customer"])){
     unset($_SESSION["customer"]);
+    unset($_SESSION["customer_name"]);
 }
 header("location:./login.php");
 

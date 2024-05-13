@@ -389,9 +389,9 @@ $result = mysqli_query($conn, $sql);
                             echo $_SESSION["admin"];
                             echo "</a>";
                         }
-                        else if(isset($_SESSION["customer"])){
+                        else if(isset($_SESSION["customer_name"])){
                             echo '<a href = "">';
-                            echo $_SESSION["customer"];
+                            echo $_SESSION["customer_name"];
                             echo "</a>";
                             echo "|";
                             echo '<a href = "../../admin/login_logout/logout.php">';
@@ -400,13 +400,13 @@ $result = mysqli_query($conn, $sql);
                             
                         }
                         else{
-                            echo '<a href="../../admin/login_logout/login.php">';
+                            echo '<a style="color:black" href="../../admin/login_logout/login.php">';
                             echo "Login";
                             echo "</a>";
-                            echo "|";
-                            echo '<a href="../registerCustomer/registerCustomer.php">';
-                            echo "Sign up";
-                            echo "</a>";
+                            // echo "|";
+                            // echo '<a href="../registerCustomer/registerCustomer.php">';
+                            // echo "Sign up";
+                            // echo "</a>";
                         } ?>
                     <!-- </button> -->
                 <!-- </a> -->
@@ -505,7 +505,7 @@ $result = mysqli_query($conn, $sql);
             echo "<form method ='POST' action='preview.php'>";
             $product_id = $row["id"];
             echo "<input name='product_id' value='$product_id' hidden>";
-            echo "<button type='submit' class='orange-button'>View</button>";
+            echo "<button type='submit' class='orange-button'>Add to cart</button>";
             echo "</form>";
             echo "</div>";
          } ?>
