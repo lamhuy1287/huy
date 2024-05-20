@@ -1,5 +1,5 @@
 <?php
-// session_start();
+session_start();
 // if(!isset($_SESSION["admin"])){
 //     header("location:../login_logout/login.php");
 // }
@@ -118,7 +118,8 @@
         <form action="processCreateCustomer.php?create=ok" method="post">
             <h1>Create your account</h1>
             <div class="input-box">
-                <input type="email" placeholder="Email" required name="email">
+                <input type="email" placeholder="Email
+                 " required name="email">
                 <i class='bx bxs-envelope'></i>
             </div>
             <div class="input-box">
@@ -129,7 +130,14 @@
                 <input type="password" placeholder="Password" required name="password">
                 <i class='bx bxs-lock-alt'></i>
             </div>
-            
+            <?php
+             
+             if(isset($_SESSION['check_email']))
+             { echo  "<p  style='color:red;text-align:center;'>";
+               echo  "This email was exist!!!";
+               echo "</p>"  ;unset($_SESSION['check_email']);}
+               
+            ?>
             <button type="submit" class="btn">Create</button>
 
         </form>

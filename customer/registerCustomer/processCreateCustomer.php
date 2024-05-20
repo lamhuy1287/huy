@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 if(!isset($_GET['create'])){
     header("location:registerCustomer.php");
 }
@@ -41,6 +41,8 @@ if ($conn->query($sql) === TRUE) {
     header("location:../home/home.php");
   } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
+      $_SESSION['check_email'] = TRUE;
+    header("location:./registerCustomer.php");
   }
 
 
