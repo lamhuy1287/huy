@@ -269,10 +269,7 @@ $result_product = mysqli_query($conn, $sql_product);
                         }
                         else if(isset($_SESSION["customer_name"])){
                             echo "<a href='file_user.php?id_user=" . $_SESSION['customer_id'] . "' class='user'><b>" . $_SESSION["customer_name"] . "</b></a>";
-                            echo "|";
-                            echo '<a href = "../../admin/login_logout/logout.php">';
-                            echo 'Logout';
-                            echo "</a>";
+                            
                             
                         }
                         else{
