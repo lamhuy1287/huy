@@ -7,7 +7,8 @@ if(isset($_SESSION["admin"])){
 if(isset($_SESSION["customer"])){
     unset($_SESSION["customer"]);
     unset($_SESSION["customer_name"]);
+    unset($_SESSION["customer_id"]);
 }
-header("location:./login.php");
+header('location:/DOAN/customer/home/home.php');
 
 ?>

@@ -1,6 +1,5 @@
 <?php
 session_start();
-$id = $_SESSION["customer_id"];
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -15,9 +14,13 @@ $conn = mysqli_connect($servername, $username, $password, $database);
 if (!$conn) {
   die("Kết nối thất bại: " . mysqli_connect_error());
 }
-$sql = "SELECT * from customers where id =$id ";
+if(!isset($_SESSION["customer_id"])){
+     header('location:/DOAN/customer/home/home.php');
+}
+$id = $_SESSION["customer_id"];
+$sql = "SELECT * from customers where id=$id;";
 $result = mysqli_query($conn, $sql);
-
+$row = mysqli_fetch_assoc($result);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -147,30 +150,71 @@ $result = mysqli_query($conn, $sql);
             border-radius: 50%;
             font-size: 13px;
         }
-        .container{
-            margin-top: 30px;
-            height: auto;
-            
-        }
-        hr{
-            border: 1px solid black;
-        }
-        .container p {
-            font-size:20px;
-        }
-        .left{
-            float:left;
-            height: auto;
-            width: 30%;
-           
-        }
-        .right{
-            float:right;
-            height: auto;
-            width: 70%;
-            border:1px solid black;
-        }
+       #table{
+        margin-top:20px;
+        height: auto;
+       }
+       hr{
+        border:1px solid black;
+       }
+       .center{
+        float:center;
+        height:auto;
+        width: 2%;
+       }
+       .left{
         
+        float:left;
+        height:auto;
+        width: 25%;
+       border:2px solid black;
+       }
+       .right {
+    float: right;
+    height: auto;
+    width: 73%;
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column; /* Added to arrange items vertically */
+    padding: 20px; /* Added padding for better spacing */
+}
+.right p, .right h1 {
+    margin-bottom: 10px;
+}
+
+.right input {
+    width: 100%;
+    padding: 5px;
+    margin-top: 5px;
+}
+
+.right button {
+    align-self: flex-start;
+}
+
+       .left button {
+        border:none;
+        background-color:white;
+       }
+       #d1,#d2,#d3{
+        display:flex;
+        height: 50px;
+        text-align:center;
+        justify-content: center;
+        align-items:center;
+        width:100%;
+        border:1px solid black;
+       }
+       .div {
+    height: auto;
+    width: 100%;
+    display: none; /* Hide all divs initially */
+    flex-direction: column; /* Ensure contents are arranged vertically */
+}
+.div1{
+    display: flex;
+    flex-direction: column;
+}
         .End {
             display: flex;
             background-color: #e6e6e6;
@@ -238,15 +282,10 @@ $result = mysqli_query($conn, $sql);
         </div>
         <div class="header_2">
             <div class="b1">
-                <img id="home_1" style="justify-content: center;" height="80px" width="80px" src="logo.png" alt="">
+                <img id="home" style="justify-content: center;" height="80px" width="80px" src="logo.png" alt="">
+                <button id="home" type="button" class="btn btn-outline-light text-dark btn-page">Home</button>
                 <script>
-                    document.getElementById("home_1").onclick = function () {
-                        location.href = "home.php";
-                    };
-                </script>
-                <button id="home_2" type="button" class="btn btn-outline-light text-dark btn-page">Home</button>
-                <script>
-                    document.getElementById("home_2").onclick = function () {
+                    document.getElementById("home").onclick = function () {
                         location.href = "home.php";
                     };
                 </script>
@@ -279,22 +318,55 @@ $result = mysqli_query($conn, $sql);
         </div>
     </div>
 
-<div class="container">
+    <div class="container" id="table">
     <div class="left">
-       <h4></h4>
-
+        <div id="d1"><button onclick="showDiv(1)">Thông tin khách hàng</button></div>      
+        <div id="d2"><button onclick="showDiv(2)">Chỉnh sửa thông tin</button></div>
+        <form action='../../admin/login_logout/logout.php'><div id="d3"><button>Đăng xuất</button></div></form>
     </div>
+    <div class="center"></div>
     <div class="right">
-    <h2>Thông tin khách hàng</h2>
-    <hr>
-    <?php while ($row = mysqli_fetch_assoc($result)) {
-        echo "<p class='name'>Tên khách hàng : ".$row['name']." </p>"; 
-        echo "<br>";
-        echo "<p class='phone'>Số điện thoại : ".$row['phone']." </p>"; 
-    } ?>
+       
+        <div class="div div1">
+            <h1 style="text-align: center;">THÔNG TIN KHÁCH HÀNG</h1>
+            <br>
+            <p>Họ và Tên: <?php echo $row['name']; ?></p>
+            <br>
+            <p>Số điện thoại: <?php echo $row['phone']; ?></p>
+            <br>
+            <p>Email: <?php echo $row['email']; ?></p>
+            <br>
+            <p>Địa chỉ nhận hàng: <?php echo $row['address']; ?></p>
+        </div>
+        <div class="div div2">
+            <form action="../update_customer/processUpdateCustomer.php" method='post'>
+                <h1 style="text-align: center;">CHỈNH SỬA THÔNG TIN</h1>
+                <br>
+                <p>Họ và Tên: <input name="name" type="text" placeholder="<?php echo $row['name']?>"></p>
+                <br>
+                <p>Số điện thoại: <input name="phone" type="text" placeholder="<?php echo $row['phone']; ?>"></p>
+                <br>
+                <p>Email: <input name="email" type="text" placeholder="<?php echo $row['email']; ?>"></p>
+                <br>
+                <p>Địa chỉ nhận hàng: <input name="address" type="text" placeholder="<?php echo $row['address']; ?>"></p>
+                <br>
+                <button type="submit" class="btn btn-warning">Cập nhật</button>
+            </form>
+        </div>
     </div>
 </div>
 
+<script>
+      function showDiv(divNumber) {
+    // Hide all divs
+    const divs = document.querySelectorAll('.div');
+    divs.forEach(div => div.style.display = 'none');
+    
+    // Show the selected div
+    document.querySelector('.div' + divNumber).style.display = 'flex';
+}
+
+    </script>
 
     <div class="End">
         <p style="margin-left: 30px;margin-right: 30px;text-align: center;justify-content: center;">Welcome to the
