@@ -163,35 +163,25 @@ $result = mysqli_query($conn, $sql);
         float:left;
         height:auto;
         width: 25%;
-       border:2px solid black;
+       border:1px solid black;
        }
-       .right {
-    float: right;
-    height: auto;
-    width: 73%;
-    border: 2px solid black;
-    display: flex;
-    flex-direction: column; /* Added to arrange items vertically */
-    padding: 20px; /* Added padding for better spacing */
-}
-.right p, .right h1 {
-    margin-bottom: 10px;
-}
-
-.right input {
-    width: 100%;
-    padding: 5px;
-    margin-top: 5px;
-}
-
-.right button {
-    align-self: flex-start;
-}
-
-       .left button {
+       .right{
+        float:right;
+        height: auto;
+        width: 73%;
+        border:2px solid black;
+        
+       }
+       .right p {
+        margin-left:20px;
+       }
+       .right p input{
         border:none;
-        background-color:white;
-       }
+    }
+    .right button {
+        margin-left:30px;
+        margin-bottom:5px;
+    }
        #d1,#d2,#d3{
         display:flex;
         height: 50px;
@@ -201,16 +191,6 @@ $result = mysqli_query($conn, $sql);
         width:100%;
         border:1px solid black;
        }
-       .div {
-    height: auto;
-    width: 100%;
-    display: none; /* Hide all divs initially */
-    flex-direction: column; /* Ensure contents are arranged vertically */
-}
-.div1{
-    display: flex;
-    flex-direction: column;
-}
         .End {
             display: flex;
             background-color: #e6e6e6;
@@ -314,52 +294,29 @@ $result = mysqli_query($conn, $sql);
         </div>
     </div>
 
-    <div class="container" id="table">
+<div class="container" id="table">
     <div class="left">
-        <div id="d1"><button onclick="showDiv(1)">Thông tin khách hàng</button></div>      
-        <div id="d2"><button onclick="showDiv(2)">Chỉnh sửa thông tin</button></div>
-        <div id="d3"><button>Đăng xuất</button></div>
+        <div id="d1"><a href="test3.php"><i class='bx bxs-user-account'></i> Thông tin khách hàng</a></div>      
+        <div id="d2"><a href="test4.php"><i class='bx bx-cog' ></i> Chỉnh sửa thông tin</a></div>
+        <div id="d3"><a href="">logout <i class='bx bx-log-out' ></i></a></div>
     </div>
     <div class="center"></div>
     <div class="right">
-        <div class="div div1">
-            <h1 style="text-align: center;">THÔNG TIN KHÁCH HÀNG</h1>
-            <br>
-            <p>Họ và Tên: Phí Lâm Huy</p>
-            <br>
-            <p>Số điện thoại: 0377006358</p>
-            <br>
-            <p>Email: superrabit266@gmail.com</p>
-            <br>
-            <p>Địa chỉ nhận hàng: Số nhà 59 ngách 259/55 xóm Đồng Phú Diễn Bắc Từ Liêm Hà Nội</p>
-        </div>
-        <div class="div div2">
-            <h1 style="text-align: center;">CHỈNH SỬA THÔNG TIN</h1>
-            <br>
-            <p>Họ và Tên: <input type="text" placeholder="Hiển thị tên hiện tại"></p>
-            <br>
-            <p>Số điện thoại: <input type="text" placeholder="Hiển thị số điện thoại hiện tại"></p>
-            <br>
-            <p>Email: <input type="text" placeholder="Hiển thị Email hiện tại"></p>
-            <br>
-            <p>Địa chỉ nhận hàng: <input type="text" placeholder="Hiển thị địa chỉ hiện tại"></p>
-            <br>
-            <button type="submit" class="btn btn-warning">Cập nhật</button>
-        </div>
+        <h1 style="text-align:center;">CHỈNH SỬA THÔNG TIN</h1>
+        <br>
+        <p>Họ và Tên : <input type="text" placeholder="Hiển thị tên hiện tại"></p>
+        <br>
+        <p>Số điện thoại : <input type="text" placeholder="hiển thị số điện thoại hiện tại"></p>
+        <br>
+        <p>Email : <input type="text" placeholder="hiển thị Email hiện tại"></p>
+        <br>
+        <P>Địa chỉ nhận hàng : <input type="text" placeholder="hiển thị địa chỉ hiện tại"></P>
+        <br>
+        <button type="submit"  class="btn btn-warning">Lưu</button>
     </div>
+
 </div>
 
-<script>
-      function showDiv(divNumber) {
-    // Hide all divs
-    const divs = document.querySelectorAll('.div');
-    divs.forEach(div => div.style.display = 'none');
-    
-    // Show the selected div
-    document.querySelector('.div' + divNumber).style.display = 'flex';
-}
-
-    </script>
 
     <div class="End">
         <p style="margin-left: 30px;margin-right: 30px;text-align: center;justify-content: center;">Welcome to the
