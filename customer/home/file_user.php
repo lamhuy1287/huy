@@ -260,10 +260,7 @@ $row = mysqli_fetch_assoc($result);
                             echo '<a href = "">';
                             echo $_SESSION["customer_name"];
                             echo "</a>";
-                            echo "|";
-                            echo '<a href = "../../admin/login_logout/logout.php">';
-                            echo 'Logout';
-                            echo "</a>";
+                           
                             
                         }
                         else{
@@ -282,10 +279,15 @@ $row = mysqli_fetch_assoc($result);
         </div>
         <div class="header_2">
             <div class="b1">
-                <img id="home" style="justify-content: center;" height="80px" width="80px" src="logo.png" alt="">
-                <button id="home" type="button" class="btn btn-outline-light text-dark btn-page">Home</button>
+            <img id="home_1" style="justify-content: center;" height="80px" width="80px" src="logo.png" alt="">
                 <script>
-                    document.getElementById("home").onclick = function () {
+                    document.getElementById("home_1").onclick = function () {
+                        location.href = "home.php";
+                    };
+                </script>
+                <button id="home_2" type="button" class="btn btn-outline-light text-dark btn-page">Home</button>
+                <script>
+                    document.getElementById("home_2").onclick = function () {
                         location.href = "home.php";
                     };
                 </script>
