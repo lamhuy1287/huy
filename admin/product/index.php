@@ -30,6 +30,10 @@ $result = mysqli_query($conn, $sql);
             font-size:30px;
             
         }
+        .sidebar {
+            position: fixed; /* Làm cho sidebar đứng yên */
+            height: auto; /* Chiều cao toàn màn hình */
+        }
 
 
     </style>

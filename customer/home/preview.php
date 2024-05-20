@@ -1,6 +1,15 @@
 <?php
 session_start();
-$product_id = $_POST['product_id'];
+if (isset($_GET['product_id'])) {
+    $product_id = $_GET['product_id'];
+    // Xử lý với $product_id, ví dụ: truy vấn sản phẩm từ cơ sở dữ liệu.
+} elseif (isset($_POST['product_id'])) {
+    $product_id = $_POST['product_id'];
+    // Xử lý với $product_id, ví dụ: thêm sản phẩm vào giỏ hàng.
+} else {
+    echo "No product ID provided.";
+    // Bạn có thể thêm logic xử lý khi không có ID sản phẩm, ví dụ: chuyển hướng hoặc hiển thị thông báo lỗi.
+}
 
 #kết nối cơ sở dữ liệu
 $servername = "localhost";
@@ -259,9 +268,7 @@ $result_product = mysqli_query($conn, $sql_product);
                             echo "</a>";
                         }
                         else if(isset($_SESSION["customer_name"])){
-                            echo '<a href = "">';
-                            echo $_SESSION["customer_name"];
-                            echo "</a>";
+                            echo "<a href='file_user.php?id_user=" . $_SESSION['customer_id'] . "' class='user'><b>" . $_SESSION["customer_name"] . "</b></a>";
                             echo "|";
                             echo '<a href = "../../admin/login_logout/logout.php">';
                             echo 'Logout';
@@ -282,14 +289,18 @@ $result_product = mysqli_query($conn, $sql_product);
         </div>
         <div class="header_2">
             <div class="b1">
-                <img style="justify-content: center;" height="80px" width="80px"
-                    src="logo.png" alt="">
-                <button id="home" type="button" class="btn btn-outline-light text-dark btn-page">Home</button>
+            <img id="home_1" style="justify-content: center;" height="80px" width="80px" src="logo.png" alt="">
                 <script>
-     document.getElementById("home").onclick = function () {
-        location.href = "home.php";
-    };
-        </script>
+                    document.getElementById("home_1").onclick = function () {
+                        location.href = "home.php";
+                    };
+                </script>
+                <button id="home_2" type="button" class="btn btn-outline-light text-dark btn-page">Home</button>
+                <script>
+                    document.getElementById("home_2").onclick = function () {
+                        location.href = "home.php";
+                    };
+                </script>
                 <div class="dropdown">
     <button type="button" class="btn btn-outline-light text-dark btn-page"  data-toggle="dropdown">Themes</button>
     <ul class="dropdown-menu">
