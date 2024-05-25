@@ -4,12 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
     
   <style>
     .text{
         font-size:30px;
     }
+    .ck-editor__editable {
+            min-height: 500px;
+        }
   </style>
 </head>
 <body>
@@ -63,10 +68,20 @@
         <input type="number" step="1" class="form-control mt-2" name='price' placeholder="Nhập giá sản phẩm" required>
         <input type="file" class="form-control mt-2" name='image' >  
         <input class="form-control mt-2" name='themes' placeholder="Phân loại sản phẩm" required>
-        <textarea class="form-control mt-2" name="description"  rows="7"></textarea>
+        <div class="form-floating mt-2">
+                <textarea name="description" class="form-control" placeholder="Leave a comment here"
+                    id="editor"></textarea>
+         </div>
         <button type="submit" class="btn btn-primary  mt-2">Thêm sản phẩm</button>
     </form>
 </div>
 </div>
+<script>
+        ClassicEditor
+            .create(document.querySelector('#editor'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
 </body>
 </html>

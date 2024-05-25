@@ -25,7 +25,7 @@ if(isset($_GET["search"])){
     $search= $_GET["search"];
     $sql = "SELECT id, name, image, price FROM products WHERE name LIKE '%$search%' OR product_code LIKE '%$search%' LIMIT $offset, $items_per_page";
 } else {
-    $sql = "SELECT id, name, image, price FROM products Where themes='ninjago' ORDER BY id DESC LIMIT $offset, $items_per_page";
+    $sql = "SELECT id, name, image, price FROM products  Where themes='ninjago' ORDER BY id DESC LIMIT $offset, $items_per_page";
 }
 
 $result = mysqli_query($conn, $sql);
@@ -49,7 +49,7 @@ $total_pages = ceil($total_rows / $items_per_page);
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<style>
+    <style>
         *{
             box-sizing: border-box;
         }
@@ -93,9 +93,6 @@ $total_pages = ceil($total_rows / $items_per_page);
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-        h4{
-            text-align:center;
         }
 
         .b1 {
@@ -170,6 +167,9 @@ $total_pages = ceil($total_rows / $items_per_page);
             justify-content: center;
             align-items:center;
         }
+        h4{
+            text-align:center;
+        }
         .col-product{
         border:1px solid black;
         height: 420px; /* Đặt chiều cao cố định cho mỗi cột */
@@ -209,12 +209,12 @@ $total_pages = ceil($total_rows / $items_per_page);
   cursor: pointer; /* Hiệu ứng con trỏ khi di chuyển vào button */
   border-radius: 8px; /* Độ bo tròn của viền */
   transition: background 0.3s, color 0.3s; /* Hiệu ứng chuyển màu nền và chữ khi hover */
-  }
+}
 
-   .orange-button:hover {
+.orange-button:hover {
   background-color: white; /* Màu nền khi hover */
   color: orange; /* Màu chữ khi hover */
-  }
+}
        
 
   
@@ -226,7 +226,7 @@ $total_pages = ceil($total_rows / $items_per_page);
            
         }
         
-</style>
+        </style>
 </head>
 <body>
 <div class="header">
@@ -249,7 +249,7 @@ $total_pages = ceil($total_rows / $items_per_page);
                         }
                         else if(isset($_SESSION["customer_name"])){
                             echo "<a href='file_user.php?id_user=" . $_SESSION['customer_id'] . "' class='user'><b>" . $_SESSION["customer_name"] . "</b></a>";
-                          
+                           
                             
                         }
                         else{
@@ -265,7 +265,8 @@ $total_pages = ceil($total_rows / $items_per_page);
             </div>
         </div>
         <div class="header_2">
-        <img id="home_1" style="justify-content: center;" height="80px" width="80px" src="logo.png" alt="">
+            <div class="b1">
+            <img id="home_1" style="justify-content: center;" height="80px" width="80px" src="logo.png" alt="">
                 <script>
                     document.getElementById("home_1").onclick = function () {
                         location.href = "home.php";
@@ -296,7 +297,7 @@ $total_pages = ceil($total_rows / $items_per_page);
             </div>
             <div class="b2">
                 <form id="search-box">
-                    <input type="text" id="search-text" name="search" placeholder="Tìm kiếm sản phẩm thuộc NinjaGo" required>
+                    <input type="text" id="search-text" name="search" placeholder="Tìm kiếm sản phẩm thuộc Disney" required>
                     <button id="search-btn"><i  class='bx bx-search'></i></button>
                 </form>
                 <button style="background-color: rgb(252,188,56);border: none;" type="button" class="btn btn-light"><i
@@ -312,14 +313,13 @@ $total_pages = ceil($total_rows / $items_per_page);
 <br>
 <?php
 // Thực hiện truy vấn SQL để tính tổng số lượng sản phẩm có themes là 'ninjago'
-$total_count_query = mysqli_query($conn, "SELECT COUNT(*) AS total_count FROM products WHERE themes = 'ninjago'");
+$total_count_query = mysqli_query($conn, "SELECT COUNT(*) AS total_count FROM products WHERE themes = 'disney'");
 $total_count_row = mysqli_fetch_assoc($total_count_query);
 $total_count = $total_count_row['total_count'];
 
 // Hiển thị số lượng sản phẩm
-echo "<h4>Showing " . mysqli_num_rows($result) . " products</h4>";
+echo "<h4>Showing " .mysqli_num_rows($result)  . " products</h4>";
 ?>
-
 <main class="container">
     <div class="row row-cols-4">
         <?php

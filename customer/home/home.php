@@ -216,37 +216,37 @@ $result = mysqli_query($conn, $sql);
             width: 18%;
             background-color: white;
             margin-bottom: 20px;
-            text-align: center;
+            
             border: 1px solid black;
             padding: 20px;
             border-radius: 10px;
         }
 
         .product img {
-            max-width: 100%;
-            height: 50%;
-            display: block;
-            margin: 0 auto;
-            border-radius: 5px;
+            height: 45%; /* Hình ảnh chiếm 60% chiều dài của cột */
+        display: block; /* Hiển thị hình ảnh dưới dạng khối để căn chỉnh */
+        display: flex;
+        margin: auto; /* Căn chỉnh hình ảnh vào giữa cột */
         }
 
         .name {
-            margin-top: 10px;
-            height: 15%;
-            color:black;
+            display: flex;
+        height: 10%;
+        font-size:14px;
+        color:black;
         }
 
         .price {
-            height: 10%;
-            margin-top: 10px;
-            font-weight: bold;
-            color: #333;
+            display: flex;
+        height: 10%;
+        font-size:16px;
+        text-align:center;
         }
 
         hr {}
 
         .orange-button {
-            height: 25;
+            
             width: 100%;
             background-color: orange;
             /* Màu nền của button */

@@ -35,15 +35,21 @@ $address_fix_injection = mysqli_real_escape_string($conn, $address);
 // $fullName_fix_injection = mysqli_real_escape_string($conn, $fullName);
 
 $sql = "insert into customers values (null,'$username_fix_injection','$email_fix_injection',md5('$password_fix_injection'),'$tel_fix_injection','$address_fix_injection');";
-
-if ($conn->query($sql) === TRUE) {
-    // echo "New record created successfully";
-    header("location:../home/home.php");
-  } else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
-      $_SESSION['check_email'] = TRUE;
-    header("location:./registerCustomer.php");
-  }
-
-
+// echo $sql;
+// if ($conn->query($sql) === TRUE) {
+//     // echo "New record created successfully";
+//     header("location:../home/home.php");
+//   } else {
+//     echo "Error: " . $sql . "<br>" . $conn->error;
+//       $_SESSION['check_email'] = TRUE;
+//     header("location:./registerCustomer.php");
+//   }
+if (mysqli_query($conn, $sql)) {
+  echo "Record updated successfully";
+  header("location:../home/home.php");
+} else {
+  echo "Error updating record: " . mysqli_error($conn);
+  $_SESSION['check_email'] = TRUE;
+      header("location:./registerCustomer.php");
+}
 ?>

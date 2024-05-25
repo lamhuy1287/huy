@@ -257,10 +257,8 @@ $row = mysqli_fetch_assoc($result);
                             echo "</a>";
                         }
                         else if(isset($_SESSION["customer_name"])){
-                            echo '<a href = "">';
-                            echo $_SESSION["customer_name"];
-                            echo "</a>";
-                           
+                            echo "<a href='file_user.php?id_user=" . $_SESSION['customer_id'] . "' class='user'><b>" . $_SESSION["customer_name"] . "</b></a>";
+                          
                             
                         }
                         else{
