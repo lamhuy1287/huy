@@ -202,83 +202,104 @@ $result = mysqli_query($conn, $sql);
         }
 
         .container {
-            height: auto;
-            width: 100%;
-            margin: 0 auto;
-            padding-top: 20px;
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
-        }
-
-        .product {
-            height: auto;
-            width: 18%;
-            background-color: white;
-            margin-bottom: 20px;
-            
-            border: 1px solid black;
             padding: 20px;
-            border-radius: 10px;
         }
-
-        .product img {
-            height: 45%; /* Hình ảnh chiếm 60% chiều dài của cột */
-        display: block; /* Hiển thị hình ảnh dưới dạng khối để căn chỉnh */
-        display: flex;
-        margin: auto; /* Căn chỉnh hình ảnh vào giữa cột */
-        }
-
-        .name {
+        .product-container {
             display: flex;
-        height: 10%;
-        font-size:14px;
-        color:black;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
         }
 
-        .price {
+        .col-product {
+            border: 1px solid black;
+            height: auto;
+            width: calc(20% - 16px);
+            /* Adjusted to fit 5 products in a row */
+            margin-top: 5px;
             display: flex;
-        height: 10%;
-        font-size:16px;
-        text-align:center;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
         }
 
-        hr {}
+        .col-product hr {
+            width: 100%;
+            border: 1px solid black;
+        }
+
+        .col-product img {
+            height: 100%;
+            display: block;
+            margin: auto;
+        }
+
+        .col-product .name {
+            display: flex;
+            font-size: 14px;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .col-product .price {
+            display: flex;
+            font-size: 16px;
+            justify-content: center;
+            align-items: center;
+        }
 
         .orange-button {
-            
-            width: 100%;
+            width: auto;
             background-color: orange;
-            /* Màu nền của button */
-            border: 2px solid orange;
-            /* Màu viền và độ dày viền */
+            border: 1px solid orange;
             color: white;
-            /* Màu chữ */
-            padding: 10px 20px;
-            /* Khoảng cách giữa chữ và viền button */
+            padding: 8px 12px;
             text-align: center;
-            /* Căn giữa chữ trong button */
             text-decoration: none;
-            /* Bỏ gạch chân cho text (nếu có) */
             display: inline-block;
-            /* Loại hiển thị */
-            font-size: 16px;
-            /* Kích thước font chữ */
-            margin: 4px 2px;
-            /* Khoảng cách giữa các button nếu có nhiều button */
+            font-size: 14px;
+            margin: 10px 0;
             cursor: pointer;
-            /* Hiệu ứng con trỏ khi di chuyển vào button */
             border-radius: 8px;
-            /* Độ bo tròn của viền */
             transition: background 0.3s, color 0.3s;
-            /* Hiệu ứng chuyển màu nền và chữ khi hover */
         }
 
         .orange-button:hover {
             background-color: white;
-            /* Màu nền khi hover */
             color: orange;
-            /* Màu chữ khi hover */
+        }
+
+        @media (max-width: 1200px) {
+            .col-product {
+                width: calc(25% - 16px);
+                /* 4 products in a row */
+            }
+        }
+
+        @media (max-width: 992px) {
+            .col-product {
+                width: calc(33.333% - 16px);
+                /* 3 products in a row */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .col-product {
+                width: calc(50% - 16px);
+                /* 2 products in a row */
+            }
+        }
+
+        @media (max-width: 576px) {
+            .col-product {
+                width: 100%;
+                /* 1 product in a row */
+            }
         }
 
         .container_1 {
@@ -545,25 +566,29 @@ $result = mysqli_query($conn, $sql);
     </div>
     <br>
     <p style="font-size: 30px;margin-left: 35px;">New sets :</p>
-    <div class="container">
-    <?php while ($row = mysqli_fetch_assoc($result)) { 
-        echo "<div class='product'>";
-        echo "<a href='preview.php?product_id=".$row['id']."'>";
-        echo "<img class='img-fluid' src='".$row['image']."' alt='".$row['name']."'/>";
-        echo "</a>";
-        echo  "<hr style='border:1px solid black;'>";
+    <main class="container">
+        <div class="product-container">
+            <?php
+            while ($row = mysqli_fetch_assoc($result)){
+                echo "<div class='col-product'>";
+                echo "<a href='preview.php?product_id=".$row['id']."'>";
+                echo "<img class='img-fluid' src='".$row['image']."' alt='".$row['name']."'/>";
+                echo "</a>";
+                echo  "<hr style='border:1px solid black;'>";
         // Thêm thẻ <a> xung quanh tên sản phẩm
-        echo "<a href='preview.php?product_id=".$row['id']."' class='name'><b>".$row['name']."</b></a>";  
-        echo "<br>";
-        echo "<b class='price'>".$row['price']." $</b>"; 
-        echo "<form method ='POST' action='preview.php'>";
-        $product_id = $row["id"];
-        echo "<input name='product_id' value='$product_id' hidden>";
-        echo "<button type='submit' class='orange-button'>Add to cart</button>";
-        echo "</form>";
-        echo "</div>";
-    } ?>
-</div>
+                echo "<a href='preview.php?product_id=".$row['id']."' class='name'><b>".$row['name']."</b></a>";  
+                echo "<br>";
+                echo "<b class='price'>".$row['price']." $</b>"; 
+                echo "<form method ='POST' action='preview.php'>";
+                $product_id = $row["id"];
+                echo "<input name='product_id' value='$product_id' hidden>";
+                echo "<button type='submit' class='orange-button'>Add to cart</button>";
+                echo "</form>";
+                echo "</div>";
+            }
+            ?>
+        </div>
+    </main>
 
 
     <br>
@@ -580,7 +605,7 @@ $result = mysqli_query($conn, $sql);
             </div>
             <div class="description">
                 <p>Illuminate an icon with this spectacular new cityscape.</p>
-               
+
             </div>
         </div>
 
@@ -595,7 +620,7 @@ $result = mysqli_query($conn, $sql);
             </div>
             <div class="description">
                 <p>Build an adventure like never before</p>
-               
+
             </div>
         </div>
 
@@ -609,7 +634,7 @@ $result = mysqli_query($conn, $sql);
             </div>
             <div class="description">
                 <p>New Medieval Town Square</p>
-               
+
             </div>
         </div>
     </div>
@@ -628,7 +653,7 @@ $result = mysqli_query($conn, $sql);
             <br>
             <p>Start an epic quest with new Dungeons & Dragons:</p>
             <p>Red Dragon’s Tale.</p>
-            
+
         </div>
     </div>
     <br>

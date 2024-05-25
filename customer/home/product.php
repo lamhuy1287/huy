@@ -50,13 +50,14 @@ $total_pages = ceil($total_rows / $items_per_page);
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <style>
-        *{
+        * {
             box-sizing: border-box;
         }
+
         .header {
             height: 130px;
             width: 100%;
-            background-color: rgb(252,188,56);
+            background-color: rgb(252, 188, 56);
             display: flex;
             flex-direction: column;
             /* Arrange children in a column */
@@ -108,7 +109,7 @@ $total_pages = ceil($total_rows / $items_per_page);
         .b2 {
             height: 90px;
             width: 50%;
-            background-color: rgb(252,188,56);
+            background-color: rgb(252, 188, 56);
             /* Just for visualization */
             display: flex;
             align-items: center;
@@ -133,100 +134,145 @@ $total_pages = ceil($total_rows / $items_per_page);
             border: none;
             font-size: 20px;
         }
-        #search-box{
+
+        #search-box {
             background: #fff;
             border-radius: 30px;
         }
-        #search-box #search-text{
+
+        #search-box #search-text {
             border: none;
             outline: none;
             background: none;
             font-size: 15px;
             width: 0;
             padding: 0;
-            transition: all 0,25s ease-in-out;
+            transition: all 0, 25s ease-in-out;
         }
-        #search-box:hover #search-text,#search-box #search-text:valid{
+
+        #search-box:hover #search-text,
+        #search-box #search-text:valid {
             width: 300px;
             padding: 10px 0px 10px 15px;
         }
-        #search-btn{
+
+        #search-btn {
             border: none;
             background-color: white;
             cursor: pointer;
-            padding:15px;
+            padding: 15px;
             border-radius: 50%;
             font-size: 13px;
         }
-        #c1{
+
+        #c1 {
             display: flex;
             background-color: black;
             height: 70px;
-            color:white;
-            text-align:center;
+            color: white;
+            text-align: center;
             justify-content: center;
-            align-items:center;
+            align-items: center;
         }
-        h4{
-            text-align:center;
+
+        h4 {
+            text-align: center;
         }
-        .col-product{
-        border:1px solid black;
-        height: 420px; /* Đặt chiều cao cố định cho mỗi cột */
-        margin-top:5px;
-       
-    }
-    .col-product hr{
-        border:1px solid black;
-    }
-    .col-product img {
-        height: 55%; /* Hình ảnh chiếm 60% chiều dài của cột */
-        display: block; /* Hiển thị hình ảnh dưới dạng khối để căn chỉnh */
-        display: flex;
-        margin: auto; /* Căn chỉnh hình ảnh vào giữa cột */
-    }
-    .col-product .name {
-        display: flex;
-        height: 10%;
-        font-size:14px;
-    }
-    .col-product .price{
-        display: flex;
-        height: 10%;
-        font-size:16px;
-    }
-    .orange-button {
-  width: 100%;
-  background-color: orange; /* Màu nền của button */
-  border: 2px solid orange; /* Màu viền và độ dày viền */
-  color: white; /* Màu chữ */
-  padding: 10px 20px; /* Khoảng cách giữa chữ và viền button */
-  text-align: center; /* Căn giữa chữ trong button */
-  text-decoration: none; /* Bỏ gạch chân cho text (nếu có) */
-  display: inline-block; /* Loại hiển thị */
-  font-size: 16px; /* Kích thước font chữ */
-  margin: 4px 2px; /* Khoảng cách giữa các button nếu có nhiều button */
-  cursor: pointer; /* Hiệu ứng con trỏ khi di chuyển vào button */
-  border-radius: 8px; /* Độ bo tròn của viền */
-  transition: background 0.3s, color 0.3s; /* Hiệu ứng chuyển màu nền và chữ khi hover */
-}
 
-.orange-button:hover {
-  background-color: white; /* Màu nền khi hover */
-  color: orange; /* Màu chữ khi hover */
-}
-       
+        .product-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+        }
 
-  
-  .End {
+        .col-product {
+            border: 1px solid black;
+            height: auto;
+            width: calc(25% - 16px);
+            margin-top: 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .col-product hr {
+            width: 100%;
+            border: 1px solid black;
+        }
+
+        .col-product img {
+            height: 55%;
+            display: block;
+            margin: auto;
+        }
+
+        .col-product .name {
+            display: flex;
+            height: 10%;
+            font-size: 14px;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .col-product .price {
+            display: flex;
+            height: 10%;
+            font-size: 16px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .orange-button {
+            width: auto;
+            background-color: orange;
+            border: 1px solid orange;
+            color: white;
+            padding: 8px 12px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 10px 0;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .orange-button:hover {
+            background-color: white;
+            color: orange;
+        }
+
+        @media (max-width: 1200px) {
+            .col-product {
+                width: calc(33.333% - 16px);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .col-product {
+                width: calc(50% - 16px);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .col-product {
+                width: 100%;
+            }
+        }
+
+        .End {
             background-color: #e6e6e6;
-            height: 70px;
+            height: auto;
             margin-left: 70px;
             margin-right: 70px;
-           
+
         }
-        
-        </style>
+    </style>
 </head>
 <body>
 <div class="header">
@@ -306,53 +352,53 @@ $total_pages = ceil($total_rows / $items_per_page);
         </div>
     </div>
 
-<div id="c1">
-<h2>Search products</h2>
-<br>
-</div>
-<br>
-<?php
-// Thực hiện truy vấn SQL để tính tổng số lượng sản phẩm có themes là 'ninjago'
-$total_count_query = mysqli_query($conn, "SELECT COUNT(*) AS total_count FROM products ");
-$total_count_row = mysqli_fetch_assoc($total_count_query);
-$total_count = $total_count_row['total_count'];
+    <div id="c1">
+        <h2>SEARCH PRODUCTS</h2>
+        <br>
+    </div>
+    <br>
+    <?php
+    // Thực hiện truy vấn SQL để tính tổng số lượng sản phẩm
+    $total_count_query = mysqli_query($conn, "SELECT COUNT(*) AS total_count FROM products");
+    $total_count_row = mysqli_fetch_assoc($total_count_query);
+    $total_count = $total_count_row['total_count'];
 
-// Hiển thị số lượng sản phẩm
-echo "<h4>Showing " . mysqli_num_rows($result)  . " products</h4>";
-?>
-<main class="container">
-    <div class="row row-cols-4">
-        <?php
-        while ($row = mysqli_fetch_assoc($result)){
-            echo "<div class='col-product'>";
-            echo "<img class='img-fluid' src='".$row['image']."' alt='".$row['name']."'/>";
-            echo "<hr>";
-            echo "<b class='name'>".$row['name']."</b>";  
-            echo "<b class='price'>".$row['price']." $</b>"; 
-            echo "<form method ='POST' action='preview.php'>";
-            $product_id = $row["id"];
-            echo "<input name='product_id' value='$product_id' hidden>";
-            echo "<button type='submit' class='orange-button'>View</button>";
-            echo "</form>";
-            echo "</div>";
-        }
-        ?>
+    // Hiển thị số lượng sản phẩm
+    echo "<h4>Showing " . mysqli_num_rows($result)  . " products</h4>";
+    ?>
+    <main class="container">
+        <div class="product-container">
+            <?php
+            while ($row = mysqli_fetch_assoc($result)){
+                echo "<div class='col-product'>";
+                echo "<img class='img-fluid' src='".$row['image']."' alt='".$row['name']."'/>";
+                echo "<hr>";
+                echo "<b class='name'>".$row['name']."</b>";  
+                echo "<b class='price'>".$row['price']." $</b>"; 
+                echo "<form method ='POST' action='preview.php'>";
+                $product_id = $row["id"];
+                echo "<input name='product_id' value='$product_id' hidden>";
+                echo "<button type='submit' class='orange-button'>Thêm vào giỏ hàng</button>";
+                echo "</form>";
+                echo "</div>";
+            }
+            ?>
         </div>
     </main>
     <br>
     <!-- Pagination -->
-<nav aria-label="Page navigation" class="d-flex justify-content-center">
-    <ul class="pagination">
-        <?php for ($page = 1; $page <= $total_pages; $page++) : ?>
+    <nav aria-label="Page navigation" class="d-flex justify-content-center">
+        <ul class="pagination">
+            <?php for ($page = 1; $page <= $total_pages; $page++) : ?>
             <li class="page-item <?php if ($page == $current_page) echo 'active'; ?>">
-                <a class="page-link" href="?page=<?php echo $page; ?>"><?php echo $page; ?></a>
+                <a class="page-link" href="?page=<?php echo $page; ?>">
+                    <?php echo $page; ?>
+                </a>
             </li>
-        <?php endfor; ?>
-    </ul>
-</nav>
-
-</div>
-<br>
+            <?php endfor; ?>
+        </ul>
+    </nav>
+    <br>
     <div class="End">
         <p style="margin-left: 30px;margin-right: 30px;text-align: center;justify-content: center;align-items:center;">Welcome to the
             Official LEGO® Shop, the amazing home of LEGO building toys, gifts, stunning display sets and more for kids
