@@ -204,7 +204,7 @@ $total_pages = ceil($total_rows / $items_per_page);
         }
 
         .col-product img {
-            height: 55%;
+            height: 100%;
             display: block;
             margin: auto;
         }
@@ -367,18 +367,21 @@ $total_pages = ceil($total_rows / $items_per_page);
     echo "<h4>Showing " . mysqli_num_rows($result)  . " products</h4>";
     ?>
     <main class="container">
-        <div class="product-container">
+    <div class="product-container">
             <?php
             while ($row = mysqli_fetch_assoc($result)){
                 echo "<div class='col-product'>";
+                echo "<a href='preview.php?product_id=".$row['id']."'>";
                 echo "<img class='img-fluid' src='".$row['image']."' alt='".$row['name']."'/>";
-                echo "<hr>";
-                echo "<b class='name'>".$row['name']."</b>";  
+                echo "</a>";
+                echo  "<hr style='border:1px solid black;'>";
+                echo "<a href='preview.php?product_id=".$row['id']."' class='name'><b>".$row['name']."</b></a>";  
+                echo "<br>";
                 echo "<b class='price'>".$row['price']." $</b>"; 
                 echo "<form method ='POST' action='preview.php'>";
                 $product_id = $row["id"];
                 echo "<input name='product_id' value='$product_id' hidden>";
-                echo "<button type='submit' class='orange-button'>Thêm vào giỏ hàng</button>";
+                echo "<button type='submit' class='orange-button'>Add to cart</button>";
                 echo "</form>";
                 echo "</div>";
             }

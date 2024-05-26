@@ -1,38 +1,46 @@
 <?php
 session_start();
+
 if (isset($_GET['product_id'])) {
     $product_id = $_GET['product_id'];
-    // Xử lý với $product_id, ví dụ: truy vấn sản phẩm từ cơ sở dữ liệu.
 } elseif (isset($_POST['product_id'])) {
     $product_id = $_POST['product_id'];
-    // Xử lý với $product_id, ví dụ: thêm sản phẩm vào giỏ hàng.
 } else {
     echo "No product ID provided.";
-    // Bạn có thể thêm logic xử lý khi không có ID sản phẩm, ví dụ: chuyển hướng hoặc hiển thị thông báo lỗi.
+    exit();
 }
 
-#kết nối cơ sở dữ liệu
+// Kết nối cơ sở dữ liệu
 $servername = "localhost";
 $username = "root";
 $password = "";
 $database = "project1";
 
-$conn = mysqli_connect($servername, $username, $password, $database);
+$conn = new mysqli($servername, $username, $password, $database);
 
-if (!$conn) {
-  die("Kết nối thất bại: " . mysqli_connect_error());
+if ($conn->connect_error) {
+    die("Kết nối thất bại: " . $conn->connect_error);
 }
 
-$sql_product = "SELECT product_code, name, price, description, image, themes FROM products WHERE id='$product_id' ";
-$result_product = mysqli_query($conn, $sql_product);
+// Lấy thông tin sản phẩm được chọn
+$sql_product = $conn->prepare("SELECT product_code, name, price, description, image, themes FROM products WHERE id = ?");
+$sql_product->bind_param("i", $product_id);
+$sql_product->execute();
+$result_product = $sql_product->get_result();
 
-// if(mysqli_num_rows($result_product) > 0) {
-//     $row_product = mysqli_fetch_assoc($result_product);
-//     $themes = $row_product['themes'];
-    
-//     $sql_related_products = "SELECT product_code, name, price, description, image FROM products WHERE themes='$themes' AND id != '$product_id' LIMIT 4";
-//     $result_related_products = mysqli_query($conn, $sql_related_products);
-// }
+$product = $result_product->fetch_assoc();
+if (!$product) {
+    echo "Product not found.";
+    exit();
+}
+
+$product_theme = $product['themes'];
+
+// Lấy 5 sản phẩm có cùng themes với sản phẩm được chọn
+$sql_related_products = $conn->prepare("SELECT id, product_code, name, price, image FROM products WHERE themes = ? AND id != ? LIMIT 5");
+$sql_related_products->bind_param("si", $product_theme, $product_id);
+$sql_related_products->execute();
+$result_related_products = $sql_related_products->get_result();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -157,38 +165,38 @@ $result_product = mysqli_query($conn, $sql_product);
             border-radius: 50%;
             font-size: 13px;
         }
-        .container{
-            display:flex;
-            height:auto;
-            width:100%;
-            background-color:white;
-        }
-        .left{
-            display:flex;
-            width:45%;
-           
-        }
-        .custom-image {
-    width: 75%;
-    height:75%;
-    display: flex;
-    margin-top:10%;
-    margin-left:5%;
-   
- }
-
-        .right{
-            display:flex;
-            height:100%;
-            width:55%;
-           
-        }
-        .btn-dark{
-            width: 100%;
-            color:white;
-        }
         
-    
+        .container {
+            display: flex;
+            height: auto;
+            width: 100%;
+            background-color: white;
+        }
+
+        .left {
+            display: flex;
+            width: 45%;
+        }
+
+        .custom-image {
+            width: 75%;
+            height: 75%;
+            display: flex;
+            margin-top: 10%;
+            margin-left: 5%;
+        }
+
+        .right {
+            display: flex;
+            height: 100%;
+            width: 55%;
+        }
+
+        .btn-dark {
+            width: 100%;
+            color: white;
+        }
+
         .product {
             width: 18%;
             background-color: white;
@@ -197,7 +205,9 @@ $result_product = mysqli_query($conn, $sql_product);
             border: 1px solid black;
             padding: 20px;
             border-radius: 10px;
+            margin-right: 10px; /* Add margin between products */
         }
+
         .product img {
             max-width: 100%;
             height: 50%;
@@ -205,37 +215,114 @@ $result_product = mysqli_query($conn, $sql_product);
             margin: 0 auto;
             border-radius: 5px;
         }
-        .name{
+
+        .name {
             margin-top: 10px;
-            height:10%;
+            height: 10%;
         }
+
         .price {
             margin-top: 10px;
             color: #333;
         }
-        hr{
-            
-        }
-        .orange-button {
-  width: 100%;
-  background-color: orange; /* Màu nền của button */
-  border: 2px solid orange; /* Màu viền và độ dày viền */
-  color: white; /* Màu chữ */
-  padding: 10px 20px; /* Khoảng cách giữa chữ và viền button */
-  text-align: center; /* Căn giữa chữ trong button */
-  text-decoration: none; /* Bỏ gạch chân cho text (nếu có) */
-  display: inline-block; /* Loại hiển thị */
-  font-size: 16px; /* Kích thước font chữ */
-  margin: 4px 2px; /* Khoảng cách giữa các button nếu có nhiều button */
-  cursor: pointer; /* Hiệu ứng con trỏ khi di chuyển vào button */
-  border-radius: 8px; /* Độ bo tròn của viền */
-  transition: background 0.3s, color 0.3s; /* Hiệu ứng chuyển màu nền và chữ khi hover */
-  }
 
-   .orange-button:hover {
-  background-color: white; /* Màu nền khi hover */
-  color: orange; /* Màu chữ khi hover */
-  }
+        .orange-button {
+            width: 100%;
+            background-color: orange;
+            border: 2px solid orange;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .orange-button:hover {
+            background-color: white;
+            color: orange;
+        }
+
+        .product-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+        }
+
+        .col-product {
+            border: 1px solid black;
+            height: auto;
+            width: calc(20% - 16px);
+            /* Adjusted to fit 5 products in a row */
+            margin-top: 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .col-product hr {
+            width: 100%;
+            border: 1px solid black;
+        }
+
+        .col-product img {
+            height: 100%;
+            display: block;
+            margin: auto;
+        }
+
+        .col-product .name {
+            display: flex;
+            font-size: 14px;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .col-product .price {
+            display: flex;
+            font-size: 16px;
+            justify-content: center;
+            align-items: center;
+        }
+
+       
+
+        @media (max-width: 1200px) {
+            .col-product {
+                width: calc(25% - 16px);
+                /* 4 products in a row */
+            }
+        }
+
+        @media (max-width: 992px) {
+            .col-product {
+                width: calc(33.333% - 16px);
+                /* 3 products in a row */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .col-product {
+                width: calc(50% - 16px);
+                /* 2 products in a row */
+            }
+        }
+
+        @media (max-width: 576px) {
+            .col-product {
+                width: 100%;
+                /* 1 product in a row */
+            }
+        }
+ 
   
   .End {
             display:flex;
@@ -328,54 +415,75 @@ $result_product = mysqli_query($conn, $sql_product);
 <br>
 <br>
 <div class="container">
-<div class="left">
-    <?php
-    while ($row = mysqli_fetch_assoc($result_product)) {
-       
-        echo "<img class='custom-image' src='" . $row['image'] . "' alt='" . $row['name'] . "'/>";
-    }
-    ?>
-</div>
+    <div class="left">
+        <?php
+        if ($result_product) {
+            echo "<img class='custom-image' src='" . $product['image'] . "' alt='" . $product['name'] . "'/>";
+        }
+        ?>
+    </div>
 
     <div class="right">
-    <div class="col">
-    <?php
-    mysqli_data_seek($result_product, 0); // Đưa con trỏ dữ liệu về lại đầu
-    while ($row = mysqli_fetch_assoc($result_product)) {
-        echo "<h2 class='name'>". $row['name'] . "</h2>";
-        echo "<br>";
-        echo "<h3>Themes: ". $row['themes'] . "</h3>";
-        echo "<br>";
-        echo "<h3 class='product_code'>Mã sản phẩm: #" . $row['product_code'] . "</h3>";
-        echo "<br>";
-        echo "<h3 class='price'>Giá sản phẩm: " . $row['price'] . "$</h3>";
-        echo "<br>";
-        echo "<br>";
-        echo "<button class='orange-button mb-5'>Thêm vào giỏ hàng</button>";
-    }
-    ?>
-</div>
-</div>
+        <div class="col">
+            <?php
+            if ($result_product) {
+                echo "<h2 class='name'>". $product['name'] . "</h2>";
+                echo "<br>";
+                echo "<h3>Themes: ". $product['themes'] . "</h3>";
+                echo "<br>";
+                echo "<h3 class='product_code'>Mã sản phẩm: #" . $product['product_code'] . "</h3>";
+                echo "<br>";
+                echo "<h3 class='price'>Giá sản phẩm: " . $product['price'] . "$</h3>";
+                echo "<br>";
+                echo "<br>";
+                echo "<button class='orange-button mb-5'>Thêm vào giỏ hàng</button>";
+            }
+            ?>
+        </div>
+    </div>
 </div>
 <br>
 <h2 style="text-align:center;">Description</h2>
 <div class="container">
     <hr>
     <div class="row">
-    <div class="col">
-    <?php
-    mysqli_data_seek($result_product, 0); // Đưa con trỏ dữ liệu về lại đầu
-    while ($row = mysqli_fetch_assoc($result_product)) {
-        echo "<h3 class='description'>" . $row['description'] . "</h3>";
-    }
-    ?>
-</div>
-
+        <div class="col">
+            <?php
+            if ($result_product) {
+                echo "<h3 class='description'>" . $product['description'] . "</h3>";
+            }
+            ?>
+        </div>
     </div>
     <hr>
 </div>
 <br>
 <h2 style="text-align:center;">Sản phẩm tương ứng</h2>
+<main class="container">
+        <div class="product-container">
+<?php
+if ($result_related_products) {
+    while ($related_product = mysqli_fetch_assoc($result_related_products)) {
+        echo "<div class='col-product mt-3 mb-3'>";
+                echo "<a href='preview.php?product_id=".$related_product['id']."'>";
+                echo "<img class='img-fluid' src='".$related_product['image']."' alt='".$related_product['name']."'/>";
+                echo "</a>";
+                echo  "<hr style='border:1px solid black;'>";
+        // Thêm thẻ <a> xung quanh tên sản phẩm
+                echo "<a href='preview.php?product_id=".$related_product['id']."' class='name'><b>".$related_product['name']."</b></a>";  
+                echo "<br>";
+                echo "<b class='price'>".$related_product['price']." $</b>"; 
+                echo "<form method ='POST' action='preview.php'>";
+                $product_id = $related_product["id"];
+                echo "<input name='product_id' value='$product_id' hidden>";
+                echo "<button type='submit' class='orange-button'>Add to cart</button>";
+                echo "</form>";
+                echo "</div>";
+    }
+}
+?>
+</div>
+    </main>
 
     <div class="End">
         <p style="margin-left: 30px;margin-right: 30px;text-align: center;justify-content: center;">Welcome to the

@@ -305,7 +305,7 @@ $result = mysqli_query($conn, $sql);
         .container_1 {
             display: flex;
             justify-content: space-between;
-            width: 1200px;
+            width: auto;
             margin: 0 auto;
         }
 
