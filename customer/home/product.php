@@ -25,13 +25,13 @@ if(isset($_GET["search"])){
     $search= $_GET["search"];
     $sql = "SELECT id, name, image, price FROM products WHERE name LIKE '%$search%' OR product_code LIKE '%$search%' LIMIT $offset, $items_per_page";
 } else {
-    $sql = "SELECT id, name, image, price FROM products  Where themes='dreamzzz' ORDER BY id DESC LIMIT $offset, $items_per_page";
+    $sql = "SELECT id, name, image, price FROM products ORDER BY id DESC LIMIT $offset, $items_per_page";
 }
 
 $result = mysqli_query($conn, $sql);
 
 // Get total number of rows
-$total_rows = mysqli_num_rows(mysqli_query($conn, "SELECT id FROM products Where themes='dreamzzz'"));
+$total_rows = mysqli_num_rows(mysqli_query($conn, "SELECT id FROM products"));
 
 // Calculate total pages
 $total_pages = ceil($total_rows / $items_per_page);
@@ -40,7 +40,6 @@ $total_pages = ceil($total_rows / $items_per_page);
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -275,9 +274,8 @@ $total_pages = ceil($total_rows / $items_per_page);
         }
     </style>
 </head>
-
 <body>
-    <div class="header">
+<div class="header">
         <div class="header_1">
             <div class="a1"></div>
             <div class="a2">
@@ -289,8 +287,7 @@ $total_pages = ceil($total_rows / $items_per_page);
                 </p>
             </div>
             <div class="a3">
-                <i class='bx bxs-user'></i>
-                <?php
+            <i class='bx bxs-user'></i> <?php
                         if(isset($_SESSION["admin"])){
                             echo '<a href = "../../admin/manager_admin/showInfo.php">';
                             echo $_SESSION["admin"];
@@ -298,7 +295,7 @@ $total_pages = ceil($total_rows / $items_per_page);
                         }
                         else if(isset($_SESSION["customer_name"])){
                             echo "<a href='file_user.php?id_user=" . $_SESSION['customer_id'] . "' class='user'><b>" . $_SESSION["customer_name"] . "</b></a>";
-                           
+                            
                             
                         }
                         else{
@@ -315,7 +312,7 @@ $total_pages = ceil($total_rows / $items_per_page);
         </div>
         <div class="header_2">
             <div class="b1">
-                <img id="home_1" style="justify-content: center;" height="80px" width="80px" src="logo.png" alt="">
+            <img id="home_1" style="justify-content: center;" height="80px" width="80px" src="logo.png" alt="">
                 <script>
                     document.getElementById("home_1").onclick = function () {
                         location.href = "home.php";
@@ -328,28 +325,26 @@ $total_pages = ceil($total_rows / $items_per_page);
                     };
                 </script>
                 <div class="dropdown">
-                    <button type="button" class="btn btn-outline-light text-dark btn-page"
-                        data-toggle="dropdown">Themes</button>
-                    <ul class="dropdown-menu">
-                        <li><a href="disney.php">Disney</a></li>
-                        <li><a href="friends.php">Friends</a></li>
-                        <li><a href="technic.php">Technic</a></li>
-                        <li><a href="dreamzzz.php">Dreamzzz</a></li>
-                        <li><a href="ninjago.php">NinjaGo</a></li>
-                    </ul>
-                </div>
+    <button type="button" class="btn btn-outline-light text-dark btn-page"  data-toggle="dropdown">Themes</button>
+    <ul class="dropdown-menu">
+    <li><a href="disney.php">Disney</a></li>
+      <li><a href="friends.php">Friends</a></li>
+      <li><a href="technic.php">Technic</a></li>
+      <li><a href="dreamzzz.php">Dreamzzz</a></li>
+      <li><a href="ninjago.php">NinjaGo</a></li>
+    </ul>
+  </div>
                 <button id="help" type="button" class="btn btn-outline-light text-dark btn-page">Help</button>
                 <script>
-                    document.getElementById("help").onclick = function () {
-                        location.href = "help.php";
-                    };
-                </script>
+     document.getElementById("help").onclick = function () {
+        location.href = "help.php";
+    };
+        </script>
             </div>
             <div class="b2">
                 <form id="search-box">
-                    <input type="text" id="search-text" name="search" placeholder="Tìm kiếm sản phẩm thuộc Disney"
-                        required>
-                    <button id="search-btn"><i class='bx bx-search'></i></button>
+                    <input type="text" id="search-text" name="search" placeholder="Tìm kiếm sản phẩm" required>
+                    <button id="search-btn"><i  class='bx bx-search'></i></button>
                 </form>
                 <button style="background-color: rgb(252,188,56);border: none;" type="button" class="btn btn-light"><i
                         class='bx bxs-cart'></i></button>
@@ -358,7 +353,7 @@ $total_pages = ceil($total_rows / $items_per_page);
     </div>
 
     <div id="c1">
-        <h2>DREAMZZZ</h2>
+        <h2>SEARCH PRODUCTS</h2>
         <br>
     </div>
     <br>
@@ -380,7 +375,6 @@ $total_pages = ceil($total_rows / $items_per_page);
                 echo "<img class='img-fluid' src='".$row['image']."' alt='".$row['name']."'/>";
                 echo "</a>";
                 echo  "<hr style='border:1px solid black;'>";
-        // Thêm thẻ <a> xung quanh tên sản phẩm
                 echo "<a href='preview.php?product_id=".$row['id']."' class='name'><b>".$row['name']."</b></a>";  
                 echo "<br>";
                 echo "<b class='price'>".$row['price']." $</b>"; 
@@ -409,8 +403,7 @@ $total_pages = ceil($total_rows / $items_per_page);
     </nav>
     <br>
     <div class="End">
-        <p style="margin-left: 30px;margin-right: 30px;text-align: center;justify-content: center;align-items:center;">
-            Welcome to the
+        <p style="margin-left: 30px;margin-right: 30px;text-align: center;justify-content: center;align-items:center;">Welcome to the
             Official LEGO® Shop, the amazing home of LEGO building toys, gifts, stunning display sets and more for kids
             and adults alike. Find the perfect gift for toddlers, kids, teens and adults for birthdays or other
             occasions such as Valentine's Day, Mother's Day and Father's Day. We make it easy to shop for toys that will
@@ -420,37 +413,34 @@ $total_pages = ceil($total_rows / $items_per_page);
     </div>
     <br>
 </body>
-<footer>
+<footer >
     <hr style="border:1px solid black;">
-    <br>
-    <div class="container" style="background-color:white;row row-cols-3">
-        <div class="row w-100">
-            <div class="col">
-
-                <h3>Liên hệ</h3>
-                <p>Địa chỉ:Phú Diễn , Bắc Từ Liêm ,Hà Nội</p>
-                <p>Email: lamhuy26@gmail.com</p>
-                <p>Điện thoại: 0377006359</p>
-            </div>
-            <div class="col">
-                <h3>Liên kết</h3>
-                <ul>
-                    <li><a href="home.php">Trang chủ</a></li>
-                    <li><a href="new.php">Sản phẩm</a></li>
-                    <li><a href="https://www.facebook.com/profile.php?id=100056716461282">Giới thiệu</a></li>
-                    <!-- Thêm các liên kết khác -->
-                </ul>
-            </div>
-            <div class="col">
-                <h3>Bản đồ</h3>
-                <div>
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14894.008647910136!2d105.75368688691543!3d21.052596739639352!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313454dc9b34f767%3A0xd6b847b3f4d5a4a0!2zUGjDuiBEaeG7hW4sIELhuq9jIFThu6sgTGnDqm0sIEjDoCBO4buZaSwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1711990425983!5m2!1svi!2s"
-                        width="300" height="200" style="border:0;" allowfullscreen="" loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+<br>
+        <div class="container" style="background-color:white;row row-cols-3">
+            <div class="row w-100">
+                <div class="col" >
+                    
+                    <h3>Liên hệ</h3>
+                    <p>Địa chỉ:Phú Diễn , Bắc Từ Liêm ,Hà Nội</p>
+                    <p>Email: lamhuy26@gmail.com</p>
+                    <p>Điện thoại: 0377006359</p>
                 </div>
-            </div>
+                <div class="col">
+                    <h3>Liên kết</h3>
+                    <ul>
+                        <li><a href="home.php">Trang chủ</a></li>
+                        <li><a href="new.php">Sản phẩm</a></li>
+                        <li><a href="https://www.facebook.com/profile.php?id=100056716461282">Giới thiệu</a></li>
+                        <!-- Thêm các liên kết khác -->
+                    </ul>
+                </div>
+                <div class="col">
+        <h3>Bản đồ</h3>
+    <div>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14894.008647910136!2d105.75368688691543!3d21.052596739639352!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313454dc9b34f767%3A0xd6b847b3f4d5a4a0!2zUGjDuiBEaeG7hW4sIELhuq9jIFThu6sgTGnDqm0sIEjDoCBO4buZaSwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1711990425983!5m2!1svi!2s" width="300" height="200" style="border:0;" allowfullscreen="" loading="lazy" 
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+     </div>      
 </footer>
 </body>
-
 </html>

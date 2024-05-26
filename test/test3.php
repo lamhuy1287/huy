@@ -4,7 +4,9 @@ $servername = "localhost";
 $username = "root";
 $password = "";
 $database = "project1";
-
+if(isset($_GET['search'])){
+    header("Location:product.php?search=".$_GET['search']);
+}
 // Create connection
 $conn = mysqli_connect($servername, $username, $password, $database);
 
@@ -12,39 +14,17 @@ $conn = mysqli_connect($servername, $username, $password, $database);
 if (!$conn) {
   die("Kết nối thất bại: " . mysqli_connect_error());
 }
-// Determine the current page
-$current_page = isset($_GET['page']) ? $_GET['page'] : 1;
-
-// Number of items per page
-$items_per_page = 12;
-
-// Calculate the offset
-$offset = ($current_page - 1) * $items_per_page;
-
-if(isset($_GET["search"])){
-    $search= $_GET["search"];
-    $sql = "SELECT id, name, image, price FROM products WHERE name LIKE '%$search%' OR product_code LIKE '%$search%' LIMIT $offset, $items_per_page";
-} else {
-    $sql = "SELECT id, name, image, price FROM products  Where themes='dreamzzz' ORDER BY id DESC LIMIT $offset, $items_per_page";
-}
-
+$sql = "SELECT * from customers";
 $result = mysqli_query($conn, $sql);
 
-// Get total number of rows
-$total_rows = mysqli_num_rows(mysqli_query($conn, "SELECT id FROM products Where themes='dreamzzz'"));
-
-// Calculate total pages
-$total_pages = ceil($total_rows / $items_per_page);
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New</title>
+    <title>Home</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -120,6 +100,7 @@ $total_pages = ceil($total_rows / $items_per_page);
             padding-right: 60px;
         }
 
+
         .btn-login {
             border: none;
         }
@@ -165,113 +146,82 @@ $total_pages = ceil($total_rows / $items_per_page);
             border-radius: 50%;
             font-size: 13px;
         }
+       #table{
+        margin-top:20px;
+        height: auto;
+       }
+       hr{
+        border:1px solid black;
+       }
+       .center{
+        float:center;
+        height:auto;
+        width: 2%;
+       }
+       .left{
+        
+        float:left;
+        height:auto;
+        width: 25%;
+       border:2px solid black;
+       }
+       .right {
+    float: right;
+    height: auto;
+    width: 73%;
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column; /* Added to arrange items vertically */
+    padding: 20px; /* Added padding for better spacing */
+}
+.right p, .right h1 {
+    margin-bottom: 10px;
+}
 
-        #c1 {
-            display: flex;
-            background-color: black;
-            height: 70px;
-            color: white;
-            text-align: center;
-            justify-content: center;
-            align-items: center;
-        }
+.right input {
+    width: 100%;
+    padding: 5px;
+    margin-top: 5px;
+}
 
-        h4 {
-            text-align: center;
-        }
+.right button {
+    align-self: flex-start;
+}
 
-        .product-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 16px;
-            justify-content: center;
-        }
-
-        .col-product {
-            border: 1px solid black;
-            height: auto;
-            width: calc(25% - 16px);
-            margin-top: 5px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-        }
-
-        .col-product hr {
-            width: 100%;
-            border: 1px solid black;
-        }
-
-        .col-product img {
-            height: 100%;
-            display: block;
-            margin: auto;
-        }
-
-        .col-product .name {
-            display: flex;
-            height: 10%;
-            font-size: 14px;
-            text-align: center;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .col-product .price {
-            display: flex;
-            height: 10%;
-            font-size: 16px;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .orange-button {
-            width: auto;
-            background-color: orange;
-            border: 1px solid orange;
-            color: white;
-            padding: 8px 12px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 14px;
-            margin: 10px 0;
-            cursor: pointer;
-            border-radius: 8px;
-            transition: background 0.3s, color 0.3s;
-        }
-
-        .orange-button:hover {
-            background-color: white;
-            color: orange;
-        }
-
-        @media (max-width: 1200px) {
-            .col-product {
-                width: calc(33.333% - 16px);
-            }
-        }
-
-        @media (max-width: 992px) {
-            .col-product {
-                width: calc(50% - 16px);
-            }
-        }
-
-        @media (max-width: 576px) {
-            .col-product {
-                width: 100%;
-            }
-        }
-
+       .left button {
+        border:none;
+        background-color:white;
+       }
+       #d1,#d2,#d3{
+        display:flex;
+        height: 50px;
+        text-align:center;
+        justify-content: center;
+        align-items:center;
+        width:100%;
+        border:1px solid black;
+       }
+       .div {
+    height: auto;
+    width: 100%;
+    display: none; /* Hide all divs initially */
+    flex-direction: column; /* Ensure contents are arranged vertically */
+}
+.div1{
+    display: flex;
+    flex-direction: column;
+}
         .End {
+            display: flex;
             background-color: #e6e6e6;
             height: auto;
-            margin-left: 70px;
-            margin-right: 70px;
+            margin-top: 20px;
+            margin-left: 10%;
+            margin-right: 10%;
+        }
 
+        .footer {
+            height: auto;
         }
     </style>
 </head>
@@ -289,16 +239,27 @@ $total_pages = ceil($total_rows / $items_per_page);
                 </p>
             </div>
             <div class="a3">
+                <!-- <a href="../../admin/login_logout/login.php"> -->
+                <!-- <button type="button" class="btn btn-outline btn-login" onclick="window.location.href = 'login.html';"> -->
                 <i class='bx bxs-user'></i>
                 <?php
                         if(isset($_SESSION["admin"])){
                             echo '<a href = "../../admin/manager_admin/showInfo.php">';
                             echo $_SESSION["admin"];
                             echo "</a>";
+                            echo "|";
+                            echo '<a href = "../../admin/login_logout/logout.php">';
+                            echo 'Logout';
+                            echo "</a>";
                         }
                         else if(isset($_SESSION["customer_name"])){
-                            echo "<a href='file_user.php?id_user=" . $_SESSION['customer_id'] . "' class='user'><b>" . $_SESSION["customer_name"] . "</b></a>";
-                           
+                            echo '<a href = "">';
+                            echo $_SESSION["customer_name"];
+                            echo "</a>";
+                            echo "|";
+                            echo '<a href = "../../admin/login_logout/logout.php">';
+                            echo 'Logout';
+                            echo "</a>";
                             
                         }
                         else{
@@ -310,20 +271,17 @@ $total_pages = ceil($total_rows / $items_per_page);
                             // echo "Sign up";
                             // echo "</a>";
                         } ?>
+                <!-- </button> -->
+                <!-- </a> -->
                 | Join LEGO® Insiders
             </div>
         </div>
         <div class="header_2">
             <div class="b1">
-                <img id="home_1" style="justify-content: center;" height="80px" width="80px" src="logo.png" alt="">
+                <img id="home" style="justify-content: center;" height="80px" width="80px" src="logo.png" alt="">
+                <button id="home" type="button" class="btn btn-outline-light text-dark btn-page">Home</button>
                 <script>
-                    document.getElementById("home_1").onclick = function () {
-                        location.href = "home.php";
-                    };
-                </script>
-                <button id="home_2" type="button" class="btn btn-outline-light text-dark btn-page">Home</button>
-                <script>
-                    document.getElementById("home_2").onclick = function () {
+                    document.getElementById("home").onclick = function () {
                         location.href = "home.php";
                     };
                 </script>
@@ -346,9 +304,8 @@ $total_pages = ceil($total_rows / $items_per_page);
                 </script>
             </div>
             <div class="b2">
-                <form id="search-box">
-                    <input type="text" id="search-text" name="search" placeholder="Tìm kiếm sản phẩm thuộc Disney"
-                        required>
+                <form action="product.php" id="search-box" method="Get">
+                    <input name="search" type="text" id="search-text" placeholder="Tìm kiếm sản phẩm" required>
                     <button id="search-btn"><i class='bx bx-search'></i></button>
                 </form>
                 <button style="background-color: rgb(252,188,56);border: none;" type="button" class="btn btn-light"><i
@@ -357,60 +314,55 @@ $total_pages = ceil($total_rows / $items_per_page);
         </div>
     </div>
 
-    <div id="c1">
-        <h2>DREAMZZZ</h2>
-        <br>
+    <div class="container" id="table">
+    <div class="left">
+        <div id="d1"><button onclick="showDiv(1)">Thông tin khách hàng</button></div>      
+        <div id="d2"><button onclick="showDiv(2)">Chỉnh sửa thông tin</button></div>
+        <div id="d3"><button>Đăng xuất</button></div>
     </div>
-    <br>
-    <?php
-    // Thực hiện truy vấn SQL để tính tổng số lượng sản phẩm
-    $total_count_query = mysqli_query($conn, "SELECT COUNT(*) AS total_count FROM products");
-    $total_count_row = mysqli_fetch_assoc($total_count_query);
-    $total_count = $total_count_row['total_count'];
-
-    // Hiển thị số lượng sản phẩm
-    echo "<h4>Showing " . mysqli_num_rows($result)  . " products</h4>";
-    ?>
-    <main class="container">
-    <div class="product-container">
-            <?php
-            while ($row = mysqli_fetch_assoc($result)){
-                echo "<div class='col-product'>";
-                echo "<a href='preview.php?product_id=".$row['id']."'>";
-                echo "<img class='img-fluid' src='".$row['image']."' alt='".$row['name']."'/>";
-                echo "</a>";
-                echo  "<hr style='border:1px solid black;'>";
-        // Thêm thẻ <a> xung quanh tên sản phẩm
-                echo "<a href='preview.php?product_id=".$row['id']."' class='name'><b>".$row['name']."</b></a>";  
-                echo "<br>";
-                echo "<b class='price'>".$row['price']." $</b>"; 
-                echo "<form method ='POST' action='preview.php'>";
-                $product_id = $row["id"];
-                echo "<input name='product_id' value='$product_id' hidden>";
-                echo "<button type='submit' class='orange-button'>Add to cart</button>";
-                echo "</form>";
-                echo "</div>";
-            }
-            ?>
+    <div class="center"></div>
+    <div class="right">
+        <div class="div div1">
+            <h1 style="text-align: center;">THÔNG TIN KHÁCH HÀNG</h1>
+            <br>
+            <p>Họ và Tên: Phí Lâm Huy</p>
+            <br>
+            <p>Số điện thoại: 0377006358</p>
+            <br>
+            <p>Email: superrabit266@gmail.com</p>
+            <br>
+            <p>Địa chỉ nhận hàng: Số nhà 59 ngách 259/55 xóm Đồng Phú Diễn Bắc Từ Liêm Hà Nội</p>
         </div>
-    </main>
-    <br>
-    <!-- Pagination -->
-    <nav aria-label="Page navigation" class="d-flex justify-content-center">
-        <ul class="pagination">
-            <?php for ($page = 1; $page <= $total_pages; $page++) : ?>
-            <li class="page-item <?php if ($page == $current_page) echo 'active'; ?>">
-                <a class="page-link" href="?page=<?php echo $page; ?>">
-                    <?php echo $page; ?>
-                </a>
-            </li>
-            <?php endfor; ?>
-        </ul>
-    </nav>
-    <br>
+        <div class="div div2">
+            <h1 style="text-align: center;">CHỈNH SỬA THÔNG TIN</h1>
+            <br>
+            <p>Họ và Tên: <input type="text" placeholder="Hiển thị tên hiện tại"></p>
+            <br>
+            <p>Số điện thoại: <input type="text" placeholder="Hiển thị số điện thoại hiện tại"></p>
+            <br>
+            <p>Email: <input type="text" placeholder="Hiển thị Email hiện tại"></p>
+            <br>
+            <p>Địa chỉ nhận hàng: <input type="text" placeholder="Hiển thị địa chỉ hiện tại"></p>
+            <br>
+            <button type="submit" class="btn btn-warning">Cập nhật</button>
+        </div>
+    </div>
+</div>
+
+<script>
+      function showDiv(divNumber) {
+    // Hide all divs
+    const divs = document.querySelectorAll('.div');
+    divs.forEach(div => div.style.display = 'none');
+    
+    // Show the selected div
+    document.querySelector('.div' + divNumber).style.display = 'flex';
+}
+
+    </script>
+
     <div class="End">
-        <p style="margin-left: 30px;margin-right: 30px;text-align: center;justify-content: center;align-items:center;">
-            Welcome to the
+        <p style="margin-left: 30px;margin-right: 30px;text-align: center;justify-content: center;">Welcome to the
             Official LEGO® Shop, the amazing home of LEGO building toys, gifts, stunning display sets and more for kids
             and adults alike. Find the perfect gift for toddlers, kids, teens and adults for birthdays or other
             occasions such as Valentine's Day, Mother's Day and Father's Day. We make it easy to shop for toys that will
@@ -420,7 +372,7 @@ $total_pages = ceil($total_rows / $items_per_page);
     </div>
     <br>
 </body>
-<footer>
+<div class="footer">
     <hr style="border:1px solid black;">
     <br>
     <div class="container" style="background-color:white;row row-cols-3">
@@ -437,7 +389,7 @@ $total_pages = ceil($total_rows / $items_per_page);
                 <ul>
                     <li><a href="home.php">Trang chủ</a></li>
                     <li><a href="new.php">Sản phẩm</a></li>
-                    <li><a href="https://www.facebook.com/profile.php?id=100056716461282">Giới thiệu</a></li>
+                    <li><a href="https://www.messenger.com/e2ee/t/6948976355124079">Liên hệ hỗ trợ</a></li>
                     <!-- Thêm các liên kết khác -->
                 </ul>
             </div>
@@ -450,7 +402,6 @@ $total_pages = ceil($total_rows / $items_per_page);
                         referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
-</footer>
-</body>
+        </div>
 
 </html>
