@@ -168,35 +168,25 @@ $result_related_products = $sql_related_products->get_result();
         
         .container {
             display: flex;
-            height: auto;
-            width: 100%;
+            flex-wrap: wrap;
             background-color: white;
+            padding: 20px;
         }
-
-        .left {
-            display: flex;
-            width: 45%;
+        .left, .right {
+            flex: 1;
+            min-width: 300px; /* Ensure a minimum width for better responsiveness */
+            padding: 10px;
         }
-
         .custom-image {
-            width: 75%;
-            height: 75%;
-            display: flex;
-            margin-top: 10%;
-            margin-left: 5%;
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
         }
-
-        .right {
-            display: flex;
-            height: 100%;
-            width: 55%;
-        }
-
         .btn-dark {
             width: 100%;
             color: white;
         }
-
         .product {
             width: 18%;
             background-color: white;
@@ -205,27 +195,18 @@ $result_related_products = $sql_related_products->get_result();
             border: 1px solid black;
             padding: 20px;
             border-radius: 10px;
-            margin-right: 10px; /* Add margin between products */
+            margin-right: 10px;
         }
-
         .product img {
             max-width: 100%;
-            height: 50%;
+            height: auto;
             display: block;
             margin: 0 auto;
             border-radius: 5px;
         }
-
-        .name {
+        .name, .price, .product_code {
             margin-top: 10px;
-            height: 10%;
         }
-
-        .price {
-            margin-top: 10px;
-            color: #333;
-        }
-
         .orange-button {
             width: 100%;
             background-color: orange;
@@ -241,10 +222,20 @@ $result_related_products = $sql_related_products->get_result();
             border-radius: 8px;
             transition: background 0.3s, color 0.3s;
         }
-
         .orange-button:hover {
             background-color: white;
             color: orange;
+        }
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .left, .right {
+                width: 100%;
+            }
+            .product {
+                width: 100%;
+            }
         }
 
         .product-container {
@@ -427,7 +418,7 @@ $result_related_products = $sql_related_products->get_result();
         <div class="col">
             <?php
             if ($result_product) {
-                echo "<h2 class='name'>". $product['name'] . "</h2>";
+                echo "<h1 class='name'>". $product['name'] . "</h1>";
                 echo "<br>";
                 echo "<h3>Themes: ". $product['themes'] . "</h3>";
                 echo "<br>";
@@ -450,7 +441,7 @@ $result_related_products = $sql_related_products->get_result();
         <div class="col">
             <?php
             if ($result_product) {
-                echo "<h3 class='description'>" . $product['description'] . "</h3>";
+                echo "<h5 class='description'>" . $product['description'] . "</h5>";
             }
             ?>
         </div>

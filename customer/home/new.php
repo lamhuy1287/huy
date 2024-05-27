@@ -23,7 +23,7 @@ $offset = ($current_page - 1) * $items_per_page;
 
 if(isset($_GET["search"])){
     $search= $_GET["search"];
-    $sql = "SELECT id, name, image, price FROM products WHERE name LIKE '%$search%' OR product_code LIKE '%$search%' LIMIT $offset, $items_per_page";
+    $sql = "SELECT id, name, image, price FROM products WHERE name LIKE '%$search%' OR product_code LIKE '%$search%' OR themes LIKE '%$search%' LIMIT $offset, $items_per_page";
 } else {
     $sql = "SELECT id, name, image, price FROM products ORDER BY id DESC LIMIT $offset, $items_per_page";
 }
