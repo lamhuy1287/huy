@@ -342,13 +342,13 @@ $row = mysqli_fetch_assoc($result);
             <form action="../update_customer/processUpdateCustomer.php" method='post'>
                 <h1 style="text-align: center;">CHỈNH SỬA THÔNG TIN</h1>
                 <br>
-                <p>Họ và Tên: <input name="name" type="text" placeholder="<?php echo $row['name']?>"></p>
+                <p>Họ và Tên: <input name="name" type="text" value="<?php echo $row['name']?>" placeholder="Full Name"></p>
                 <br>
-                <p>Số điện thoại: <input name="phone" type="text" placeholder="<?php echo $row['phone']; ?>"></p>
+                <p>Số điện thoại: <input name="phone" value="<?php echo $row['phone']?>" type="text" placeholder="Phone Number"></p>
                 <br>
-                <p>Email: <input name="email" type="text" placeholder="<?php echo $row['email']; ?>"></p>
+                <p>Email: <input name="email" type="text" value="<?php echo $row['email']?>" placeholder="Gmail"></p>
                 <br>
-                <p>Địa chỉ nhận hàng: <input name="address" type="text" placeholder="<?php echo $row['address']; ?>"></p>
+                <p>Địa chỉ nhận hàng: <input name="address" value="<?php echo $row['address']?>" type="text" placeholder="Address"></p>
                 <br>
                 <button type="submit" class="btn btn-warning">Cập nhật</button>
             </form>
