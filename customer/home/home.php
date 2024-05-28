@@ -515,8 +515,10 @@ $result = mysqli_query($conn, $sql);
                     <input name="search" type="text" id="search-text" placeholder="Tìm kiếm sản phẩm" required>
                     <button id="search-btn"><i class='bx bx-search'></i></button>
                 </form>
-                <button style="background-color: rgb(252,188,56);border: none;" type="button" class="btn btn-light"><i
-                        class='bx bxs-cart'></i></button>
+                <form action='./cardCustomer/showCart.php'>
+                    <button type='submit' style="background-color: rgb(252,188,56);border: none;" type="button" class="btn btn-light"><i
+                            class='bx bxs-cart'></i></button>
+                </form>
             </div>
         </div>
     </div>
@@ -582,8 +584,15 @@ $result = mysqli_query($conn, $sql);
                 echo "<form method ='POST' action='preview.php'>";
                 $product_id = $row["id"];
                 echo "<input name='product_id' value='$product_id' hidden>";
-                echo "<button type='submit' class='orange-button'>Add to cart</button>";
+                echo "<button type='submit' class='orange-button'>Detail</button>";
                 echo "</form>";
+
+
+                echo "<form method ='POST' action='./cardCustomer/processAddToCard.php'>";
+                echo "<input name='product_id_cart' value='$product_id' hidden>";
+                echo "<button style='margin-left:4px;' type='submit' class='orange-button'>Add To Card</button>";
+                echo "</form>";
+
                 echo "</div>";
             }
             ?>
