@@ -388,7 +388,7 @@ for ($i = 0; $i < $max; $i++) {
                         <?php echo $row['name'] ?>
                     </td>
                     <td>
-                        <?php echo $row['price'] ?>
+                        <?php echo "<p class='price'>".$row['price']."$</p>";  ?>
                     </td>
                     <td>
                         <a class="fa-solid fa-minus"
@@ -398,7 +398,7 @@ for ($i = 0; $i < $max; $i++) {
                             href='processAddToCard.php?status=plus&id=<?php echo $array_keys[$i]; ?>'></a>
                     </td>
                     <td>
-                        <?php echo $row['price'] * $_SESSION['cart'][$array_keys[$i]] ?>
+                        <?php echo "<p class='price'>". $row['price'] * $_SESSION['cart'][$array_keys[$i]]."$</p>"; ?>
                     </td>
                     <?php 
                         $subtotal = $row['price'] * $_SESSION['cart'][$array_keys[$i]];
