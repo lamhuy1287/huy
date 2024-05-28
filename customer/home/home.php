@@ -581,13 +581,7 @@ $result = mysqli_query($conn, $sql);
                 echo "<a href='preview.php?product_id=".$row['id']."' class='name'><b>".$row['name']."</b></a>";  
                 echo "<br>";
                 echo "<b class='price'>".$row['price']." $</b>"; 
-                echo "<form method ='POST' action='preview.php'>";
                 $product_id = $row["id"];
-                echo "<input name='product_id' value='$product_id' hidden>";
-                echo "<button type='submit' class='orange-button'>Detail</button>";
-                echo "</form>";
-
-
                 echo "<form method ='POST' action='./cardCustomer/processAddToCard.php'>";
                 echo "<input name='product_id_cart' value='$product_id' hidden>";
                 echo "<button style='margin-left:4px;' type='submit' class='orange-button'>Add To Card</button>";
