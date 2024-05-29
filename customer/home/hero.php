@@ -373,21 +373,20 @@ $total_pages = ceil($total_rows / $items_per_page);
     ?>
     <main class="container">
     <div class="product-container">
-            <?php
+    <?php
             while ($row = mysqli_fetch_assoc($result)){
                 echo "<div class='col-product'>";
                 echo "<a href='preview.php?product_id=".$row['id']."'>";
                 echo "<img class='img-fluid' src='".$row['image']."' alt='".$row['name']."'/>";
                 echo "</a>";
                 echo  "<hr style='border:1px solid black;'>";
-        // Thêm thẻ <a> xung quanh tên sản phẩm
                 echo "<a href='preview.php?product_id=".$row['id']."' class='name'><b>".$row['name']."</b></a>";  
                 echo "<br>";
                 echo "<b class='price'>".$row['price']." $</b>"; 
-                echo "<form method ='POST' action='preview.php'>";
                 $product_id = $row["id"];
-                echo "<input name='product_id' value='$product_id' hidden>";
-                echo "<button type='submit' class='orange-button'>Add to cart</button>";
+                echo "<form method ='POST' action='./cardCustomer/processAddToCard.php'>";
+                echo "<input name='product_id_cart' value='$product_id' hidden>";
+                echo "<button style='margin-left:4px;' type='submit' class='orange-button'>Add To Card</button>";
                 echo "</form>";
                 echo "</div>";
             }

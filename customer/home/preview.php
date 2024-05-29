@@ -23,7 +23,7 @@ if ($conn->connect_error) {
 }
 
 // Lấy thông tin sản phẩm được chọn
-$sql_product = $conn->prepare("SELECT product_code, name, price, description, image, themes FROM products WHERE id = ?");
+$sql_product = $conn->prepare("SELECT id,product_code, name, price, description, image, themes FROM products WHERE id = ?");
 $sql_product->bind_param("i", $product_id);
 $sql_product->execute();
 $result_product = $sql_product->get_result();
@@ -427,7 +427,11 @@ $result_related_products = $sql_related_products->get_result();
                 echo "<h3 class='price'>Giá sản phẩm: " . $product['price'] . "$</h3>";
                 echo "<br>";
                 echo "<br>";
-                echo "<button class='orange-button mb-5'>Thêm vào giỏ hàng</button>";
+                echo "<form method ='POST' action='./cardCustomer/processAddToCard.php'>";
+                $product_id = $product["id"];
+                echo "<input name='product_id_cart' value='$product_id' hidden>";
+                echo "<button style='margin-left:4px;' type='submit' class='orange-button'>Add To Card</button>";
+                echo "</form>";
             }
             ?>
         </div>
@@ -464,10 +468,10 @@ if ($result_related_products) {
                 echo "<a href='preview.php?product_id=".$related_product['id']."' class='name'><b>".$related_product['name']."</b></a>";  
                 echo "<br>";
                 echo "<b class='price'>".$related_product['price']." $</b>"; 
-                echo "<form method ='POST' action='preview.php'>";
-                $product_id = $related_product["id"];
-                echo "<input name='product_id' value='$product_id' hidden>";
-                echo "<button type='submit' class='orange-button'>Add to cart</button>";
+                $product_id = $row["id"];
+                echo "<form method ='POST' action='./cardCustomer/processAddToCard.php'>";
+                echo "<input name='product_id_cart' value='$product_id' hidden>";
+                echo "<button style='margin-left:4px;' type='submit' class='orange-button'>Add To Card</button>";
                 echo "</form>";
                 echo "</div>";
     }

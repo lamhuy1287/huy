@@ -40,6 +40,7 @@ else{
         * {
             box-sizing: border-box;
         }
+        
 
         .header {
             height: 130px;
@@ -363,7 +364,7 @@ else{
                         <th>Total</th>
                     </tr>
                     <?php
-if ($max == 1) {
+if ($max == 0) {
     echo "Giỏ hàng hiện chưa có gì??? Bạn hãy đi lựa chọn sản phẩm phù hợp nào";
 }
 $total = 0; // Biến để lưu trữ tổng số tiền

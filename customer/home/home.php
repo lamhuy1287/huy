@@ -577,7 +577,6 @@ $result = mysqli_query($conn, $sql);
                 echo "<img class='img-fluid' src='".$row['image']."' alt='".$row['name']."'/>";
                 echo "</a>";
                 echo  "<hr style='border:1px solid black;'>";
-        // Thêm thẻ <a> xung quanh tên sản phẩm
                 echo "<a href='preview.php?product_id=".$row['id']."' class='name'><b>".$row['name']."</b></a>";  
                 echo "<br>";
                 echo "<b class='price'>".$row['price']." $</b>"; 
@@ -586,7 +585,6 @@ $result = mysqli_query($conn, $sql);
                 echo "<input name='product_id_cart' value='$product_id' hidden>";
                 echo "<button style='margin-left:4px;' type='submit' class='orange-button'>Add To Card</button>";
                 echo "</form>";
-
                 echo "</div>";
             }
             ?>
