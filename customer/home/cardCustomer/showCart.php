@@ -14,8 +14,8 @@ $array_keys = array_keys($_SESSION['cart']);
 $max = count($array_keys);
 }
 else{
-   echo "Chưa có sản phẩm nào trong giỏ";
-    exit;
+//    echo "Chưa có sản phẩm nào trong giỏ";
+//     exit;
 }
 
       
