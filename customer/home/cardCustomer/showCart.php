@@ -14,7 +14,8 @@ $array_keys = array_keys($_SESSION['cart']);
 $max = count($array_keys);
 }
 else{
-  echo "Chưa có sản phẩm nào trong giỏ";
+   echo "Chưa có sản phẩm nào trong giỏ";
+    exit;
 }
 
       
@@ -366,6 +367,7 @@ else{
                     <?php
 if ($max == 0) {
     echo "Giỏ hàng hiện chưa có gì??? Bạn hãy đi lựa chọn sản phẩm phù hợp nào";
+    // exit;   
 }
 $total = 0; // Biến để lưu trữ tổng số tiền
 

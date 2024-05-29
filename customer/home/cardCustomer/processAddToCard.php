@@ -1,4 +1,26 @@
-<?php 
+<?php
+// echo $_SERVER['REQUEST_URI'];exit;
+// echo 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];exit;
+// $url = ""; 
+// if(isset($_POST['old_url'])){
+//     $url = $_POST['old_url'];
+//     $url = '';
+// }
+// else{
+//     $url = '';
+// }
+// $url = 'location:';
+// $url = $url .$_POST['old_url'];
+
+// echo $url; exit;
+if(isset($_POST['old_url'])){
+    $url = 'location:';
+    $url = $url .$_POST['old_url'];
+}
+else{
+    $url = 'location:./showCart.php';
+}
+
 session_start();
 if(isset($_GET['status'])){
     $cart_id = intval($_GET['id']);
@@ -36,16 +58,15 @@ if(isset($_GET['status'])){
 
 
 
-
 $id = $_POST['product_id_cart'];
 if(!isset($_SESSION['cart'][$id])){
     $_SESSION['cart'][$id] = 1;
-    header("location:../home.php");
+    header($url);
     exit;
 }
 if(!empty($_SESSION['cart'][$id])){
     $_SESSION['cart'][$id]++;
-    header("location:../home.php"); 
+    header($url); 
     exit;   
 }
 // print_r($_SESSION['cart']);
