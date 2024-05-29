@@ -420,7 +420,7 @@ for ($i = 0; $i < $max; $i++) {
         <div class="right">
             <div class="right_1">
           
-                <h3>Tổng giá trị đơn hàng :</h3>
+                <h3>Total order value :</h3>
                 <br>
                 <h4>
                <?php 
@@ -428,7 +428,7 @@ for ($i = 0; $i < $max; $i++) {
                ?>
                 </h4>
                 <hr>
-                <button type="submit" class="orange-button mb-4">Thanh toán</button>
+                <button type="submit" class="orange-button mb-4">Check out</button>
             </div>
         </div>
     </main>

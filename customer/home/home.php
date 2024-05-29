@@ -36,70 +36,77 @@ $result = mysqli_query($conn, $sql);
         }
 
         .header {
-            height: 130px;
-            width: 100%;
-            background-color: rgb(252, 188, 56);
             display: flex;
             flex-direction: column;
-            /* Arrange children in a column */
+            width: 100%;
+            
         }
-
+        .header_1, .header_2 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            width: 100%;
+            
+        }
         .header_1 {
-            height: 40px;
-            width: 100%;
-            background-color: aliceblue;
-            display: flex;
+            background-color: #f8f9fa;
         }
-
+        
+        .a1, .a3 {
+            display: flex;
+            align-items: center;
+        }
+        .a2 p {
+            display: flex;
+            align-items: center;
+            margin: 0;
+        }
+        .a2 p i, .a2 p a {
+            margin: 0 5px;
+        }
         .header_2 {
-            height: 90px;
-            /* Changed height to accommodate the image height */
-            width: 100%;
-            display: flex;
-        }
-
-        .a1,
-        .a3 {
-            height: 40px;
-            width: 25%;
-            background-color: rgb(255, 255, 255);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .a2 {
-            height: 40px;
-            width: 50%;
-            background-color: rgb(255, 255, 255);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .b1 {
-            height: 90px;
-            width: 50%;
-            display: flex;
-            align-items: center;
-            /* Center vertically */
-            padding-left: 20px;
-            /* Add padding to separate items from the left edge */
-        }
-
-        .b2 {
-            height: 90px;
-            width: 50%;
             background-color: rgb(252, 188, 56);
-            /* Just for visualization */
+        }
+        .b1 {
             display: flex;
             align-items: center;
-            /* Center vertically */
-            justify-content: flex-end;
-            /* Push buttons to the right */
-            padding-right: 60px;
+            gap: 10px;
+            background-color: rgb(252, 188, 56);
         }
-
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .dropdown-menu li a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown-menu li a:hover {
+            background-color: #f1f1f1;
+        }
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+        .b2 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: rgb(252, 188, 56);
+        }
+        .b1 .b2 {
+            flex: 1; /* Allow these sections to grow and shrink */  
+        }
 
         .btn-login {
             border: none;
@@ -148,57 +155,44 @@ $result = mysqli_query($conn, $sql);
         }
 
         .banner {
-            height: auto;
-            width: 100%;
-            background-color: rgb(9, 30, 49);
-            /* Màu nền của banner */
-            display: flex;
-            justify-content: center;
-            /* Canh giữa theo chiều ngang */
-            align-items: center;
-            /* Canh giữa theo chiều dọc */
-
+            position: relative;
         }
-
         .banner img {
-
-            max-width: 100%;
-            /* Đảm bảo ảnh không vượt quá kích thước của banner */
-            max-height: 100%;
-            /* Đảm bảo ảnh không vượt quá kích thước của banner */
+            width: 100%;
+        }
+        .banner a {
+            position: absolute;
+            top: 90%;
+            right: 70px;
+            transform: translateY(-50%);
+            background-color: rgb(252,188,56);
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
         }
 
 
         .content {
-            margin-left: 80px;
-            /* Khoảng cách từ lề trái */
-            margin-right: 80px;
-            /* Khoảng cách từ lề phải */
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            /* Chia thành 5 cột bằng nhau */
-            grid-gap: 20px;
-            /* Khoảng cách giữa các cột */
-            margin-top: 20px;
-            /* Khoảng cách từ banner xuống div */
+            margin-top:3%;
             display: flex;
-            justify-content: center;
-            align-items: center;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 10px; /* Khoảng cách giữa các cột */
+            margin-left:5%;
+            margin-right:5%;
         }
-
-        /* CSS cho từng cột */
         .column {
-            background-color: lightgray;
-            /* Màu nền của mỗi cột */
-            padding: 20px;
-            /* Khoảng cách giữa nội dung và viền cột */
-            height: 60px;
-            border-radius: 15px;
-        }
-
-        .column a {
+            background-color: rgb(252,188,56);
+            flex: 1 1 calc(16.66% - 10px); /* Tính toán chiều rộng của cột */
             text-align: center;
-            color: #000;
+            margin-bottom: 10px; /* Khoảng cách giữa các hàng khi xuống dòng */
+        }
+        .column a {
+            display: block;
+            padding: 20px;
+            text-decoration: none;
+            color: black;
         }
 
         .container {
@@ -439,7 +433,7 @@ $result = mysqli_query($conn, $sql);
 </head>
 
 <body>
-    <div class="header">
+<div class="header">
         <div class="header_1">
             <div class="a1"></div>
             <div class="a2">
@@ -451,8 +445,6 @@ $result = mysqli_query($conn, $sql);
                 </p>
             </div>
             <div class="a3">
-                <!-- <a href="../../admin/login_logout/login.php"> -->
-                <!-- <button type="button" class="btn btn-outline btn-login" onclick="window.location.href = 'login.html';"> -->
                 <i class='bx bxs-user'></i>
                 <?php
                         if(isset($_SESSION["admin"])){
@@ -466,35 +458,21 @@ $result = mysqli_query($conn, $sql);
                         }
                         else if(isset($_SESSION["customer_name"])){
                             echo "<a href='file_user.php?id_user=" . $_SESSION['customer_id'] . "' class='user'><b>" . $_SESSION["customer_name"] . "</b></a>";
-                            
-                            
                         }
                         else{
                             echo '<a style="color:black" href="../../admin/login_logout/login.php">';
                             echo "Login";
                             echo "</a>";
-                            // echo "|";
-                            // echo '<a href="../registerCustomer/registerCustomer.php">';
-                            // echo "Sign up";
-                            // echo "</a>";
                         } ?>
-                <!-- </button> -->
-                <!-- </a> -->
                 | Join LEGO® Insiders
             </div>
         </div>
         <div class="header_2">
             <div class="b1">
-                <img id="home" style="justify-content: center;" height="80px" width="80px" src="logo.png" alt="">
+                <img id="home-logo" height="80px" width="80px" src="logo.png" alt="">
                 <button id="home" type="button" class="btn btn-outline-light text-dark btn-page">Home</button>
-                <script>
-                    document.getElementById("home").onclick = function () {
-                        location.href = "home.php";
-                    };
-                </script>
                 <div class="dropdown">
-                    <button type="button" class="btn btn-outline-light text-dark btn-page"
-                        data-toggle="dropdown">Themes</button>
+                    <button type="button" class="btn btn-outline-light text-dark btn-page" data-toggle="dropdown">Themes</button>
                     <ul class="dropdown-menu">
                         <li><a href="disney.php">Disney</a></li>
                         <li><a href="friends.php">Friends</a></li>
@@ -504,33 +482,32 @@ $result = mysqli_query($conn, $sql);
                     </ul>
                 </div>
                 <button id="help" type="button" class="btn btn-outline-light text-dark btn-page">Help</button>
-                <script>
-                    document.getElementById("help").onclick = function () {
-                        location.href = "help.php";
-                    };
-                </script>
             </div>
             <div class="b2">
-                <form action="product.php" id="search-box" method="Get">
+                <form action="product.php" id="search-box" method="get">
                     <input name="search" type="text" id="search-text" placeholder="Tìm kiếm sản phẩm" required>
                     <button id="search-btn"><i class='bx bx-search'></i></button>
                 </form>
                 <form action='./cardCustomer/showCart.php'>
-                    <button type='submit' style="background-color: rgb(252,188,56);border: none;" type="button" class="btn btn-light"><i
-                            class='bx bxs-cart'></i></button>
+                    <button type='submit' style="background-color: rgb(252,188,56);border: none;" class="btn btn-light"><i class='bx bxs-cart'></i></button>
                 </form>
             </div>
         </div>
     </div>
 
-
-    <div class="banner" style="position: relative;">
-        <img src="https://collider.com/wp-content/uploads/2017/09/lego-ninjago-movie-illustration-banner.jpg" alt=""
-            style="width: 100%;">
-        <a href="ninjago.php"
-            style="position: absolute; top: 90%; right: 70px; transform: translateY(-50%); background-color: rgb(252,188,56); color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">See
-            More</a>
+    <div class="banner">
+        <img src="https://collider.com/wp-content/uploads/2017/09/lego-ninjago-movie-illustration-banner.jpg" alt="">
+        <a href="ninjago.php">See More</a>
     </div>
+
+    <script>
+        document.getElementById("home").onclick = function () {
+            location.href = "home.php";
+        };
+        document.getElementById("help").onclick = function () {
+            location.href = "help.php";
+        };
+    </script>
 
 
     <div class="content">

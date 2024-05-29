@@ -351,8 +351,10 @@ $total_pages = ceil($total_rows / $items_per_page);
                         required>
                     <button id="search-btn"><i class='bx bx-search'></i></button>
                 </form>
-                <button style="background-color: rgb(252,188,56);border: none;" type="button" class="btn btn-light"><i
-                        class='bx bxs-cart'></i></button>
+                <form action='./cardCustomer/showCart.php'>
+                    <button type='submit' style="background-color: rgb(252,188,56);border: none;" type="button" class="btn btn-light"><i
+                            class='bx bxs-cart'></i></button>
+                </form>
             </div>
         </div>
     </div>

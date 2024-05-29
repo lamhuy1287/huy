@@ -398,8 +398,10 @@ $result_related_products = $sql_related_products->get_result();
                     <input type="text" id="search-text" placeholder="Tìm kiếm sản phẩm" required>
                     <button id="search-btn"><i  class='bx bx-search'></i></button>
                 </form>
-                <button style="background-color: rgb(252,188,56);border: none;" type="button" class="btn btn-light"><i
-                        class='bx bxs-cart'></i></button>
+                <form action='./cardCustomer/showCart.php'>
+                    <button type='submit' style="background-color: rgb(252,188,56);border: none;" type="button" class="btn btn-light"><i
+                            class='bx bxs-cart'></i></button>
+                </form>
             </div>
         </div>
 </div>
@@ -468,7 +470,7 @@ if ($result_related_products) {
                 echo "<a href='preview.php?product_id=".$related_product['id']."' class='name'><b>".$related_product['name']."</b></a>";  
                 echo "<br>";
                 echo "<b class='price'>".$related_product['price']." $</b>"; 
-                $product_id = $row["id"];
+                $product_id = $related_product["id"];
                 echo "<form method ='POST' action='./cardCustomer/processAddToCard.php'>";
                 echo "<input name='product_id_cart' value='$product_id' hidden>";
                 echo "<button style='margin-left:4px;' type='submit' class='orange-button'>Add To Card</button>";
