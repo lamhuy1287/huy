@@ -14,8 +14,8 @@ $array_keys = array_keys($_SESSION['cart']);
 $max = count($array_keys);
 }
 else{
-//    echo "Chưa có sản phẩm nào trong giỏ";
-//     exit;
+//   echo "Chưa có sản phẩm nào trong giỏ";
+    // exit;
 }
 
       
@@ -356,6 +356,16 @@ else{
 
         <div class="left">
             <div class="left_1">
+                <?php
+
+if (empty($max)) {
+    // echo "Giỏ hàng hiện chưa có gì??? Bạn hãy đi lựa chọn sản phẩm phù hợp nào";
+    ?>
+    <h1>Mau đi mua hàng đi giỏ hàng méo có gì</h1>
+    <?php
+    exit;   
+}
+                ?>
                 <table>
                     <tr>
                         <th>Image</th>
@@ -365,10 +375,7 @@ else{
                         <th>Total</th>
                     </tr>
                     <?php
-if ($max == 0) {
-    echo "Giỏ hàng hiện chưa có gì??? Bạn hãy đi lựa chọn sản phẩm phù hợp nào";
-    // exit;   
-}
+
 $total = 0; // Biến để lưu trữ tổng số tiền
 
 for ($i = 0; $i < $max; $i++) {
@@ -396,6 +403,7 @@ for ($i = 0; $i < $max; $i++) {
                     <td>
                         <a class="fa-solid fa-minus" 
                         onclick="minus()"    href='processAddToCard.php?status=minus&id=<?php echo $array_keys[$i]; ?>'></a>
+                       
                         <?php
                         echo "<span id='minus'>";
                             echo $_SESSION['cart'][$array_keys[$i]];
