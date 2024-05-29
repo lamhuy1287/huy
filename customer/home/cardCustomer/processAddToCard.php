@@ -1,4 +1,13 @@
-<?php 
+<?php
+
+if(isset($_POST['old_url'])){
+    $url = 'location:';
+    $url = $url .$_POST['old_url'];
+}
+else{
+    $url = 'location:./showCart.php';
+}
+
 session_start();
 if(isset($_GET['status'])){
     $cart_id = intval($_GET['id']);
@@ -14,7 +23,7 @@ if(isset($_GET['status'])){
     }
     else{
         // minus
-        if($_SESSION['cart'][$cart_id] <= 1){
+        if($_SESSION['cart'][$cart_id] === 1){
             unset($_SESSION['cart'][$cart_id]);
             header('location:./showCart.php');
             exit;
@@ -36,16 +45,15 @@ if(isset($_GET['status'])){
 
 
 
-
 $id = $_POST['product_id_cart'];
 if(!isset($_SESSION['cart'][$id])){
     $_SESSION['cart'][$id] = 1;
-    header("location:../home.php");
+    header($url);
     exit;
 }
 if(!empty($_SESSION['cart'][$id])){
     $_SESSION['cart'][$id]++;
-    header("location:../home.php"); 
+    header($url); 
     exit;   
 }
 // print_r($_SESSION['cart']);

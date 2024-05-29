@@ -14,7 +14,8 @@ $array_keys = array_keys($_SESSION['cart']);
 $max = count($array_keys);
 }
 else{
-  echo "Chưa có sản phẩm nào trong giỏ";
+   echo "Chưa có sản phẩm nào trong giỏ";
+    exit;
 }
 
       
@@ -366,6 +367,7 @@ else{
                     <?php
 if ($max == 0) {
     echo "Giỏ hàng hiện chưa có gì??? Bạn hãy đi lựa chọn sản phẩm phù hợp nào";
+    // exit;   
 }
 $total = 0; // Biến để lưu trữ tổng số tiền
 
@@ -392,11 +394,15 @@ for ($i = 0; $i < $max; $i++) {
                         <?php echo "<p class='price'>".$row['price']."$</p>";  ?>
                     </td>
                     <td>
-                        <a class="fa-solid fa-minus"
-                            href='processAddToCard.php?status=minus&id=<?php echo $array_keys[$i]; ?>'></a>
-                        <?php echo $_SESSION['cart'][$array_keys[$i]] ?>
+                        <a class="fa-solid fa-minus" 
+                        onclick="minus()"    href='processAddToCard.php?status=minus&id=<?php echo $array_keys[$i]; ?>'></a>
+                        <?php
+                        echo "<span id='minus'>";
+                            echo $_SESSION['cart'][$array_keys[$i]];
+                        echo "</span>";
+                        ?>
                         <a class="fa-solid fa-plus"
-                            href='processAddToCard.php?status=plus&id=<?php echo $array_keys[$i]; ?>'></a>
+                             href='processAddToCard.php?status=plus&id=<?php echo $array_keys[$i]; ?>'></a>
                     </td>
                     <td>
                         <?php echo "<p class='price'>". $row['price'] * $_SESSION['cart'][$array_keys[$i]]."$</p>"; ?>
@@ -444,6 +450,19 @@ for ($i = 0; $i < $max; $i++) {
         </p>
     </div>
     <br>
+    <script>
+    
+    function minus(){
+        // alert("123");
+        let number = document.getElementById('minus').innerHTML;
+        let quantity = parseInt(number);
+        // alert(quantity);
+        if(quantity === 1){
+            confirm("Bạn chắc chắn muốn xóa sản phẩm này???");
+        }
+
+    }
+</script>
 </body>
 <div class="footer">
     <hr style="border:1px solid black;">
