@@ -1,18 +1,5 @@
 <?php
-// echo $_SERVER['REQUEST_URI'];exit;
-// echo 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];exit;
-// $url = ""; 
-// if(isset($_POST['old_url'])){
-//     $url = $_POST['old_url'];
-//     $url = '';
-// }
-// else{
-//     $url = '';
-// }
-// $url = 'location:';
-// $url = $url .$_POST['old_url'];
 
-// echo $url; exit;
 if(isset($_POST['old_url'])){
     $url = 'location:';
     $url = $url .$_POST['old_url'];
@@ -36,7 +23,7 @@ if(isset($_GET['status'])){
     }
     else{
         // minus
-        if($_SESSION['cart'][$cart_id] <= 1){
+        if($_SESSION['cart'][$cart_id] === 1){
             unset($_SESSION['cart'][$cart_id]);
             header('location:./showCart.php');
             exit;
