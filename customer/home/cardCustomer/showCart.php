@@ -11,6 +11,7 @@ $conn = new mysqli($servername, $username, $password,$db_name,$port);
 // print_r($_SESSION['cart']);exit;
 if(isset($_SESSION['cart'])){
 $array_keys = array_keys($_SESSION['cart']);
+$_SESSION['product_id'] = $array_keys;
 $max = count($array_keys);
 }
 else{
@@ -443,11 +444,12 @@ for ($i = 0; $i < $max; $i++) {
                 <br>
                 <h4>
                <?php 
+                $_SESSION['total'] = $total; 
                echo " $total $  ";
                ?>
                 </h4>
                 <hr>
-                <button type="submit" class="orange-button mb-4">Check out</button>
+                <form action='customer_info.php'><button type="submit" class="orange-button mb-4">Check out</button></form>
             </div>
         </div>
     </main>
