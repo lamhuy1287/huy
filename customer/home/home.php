@@ -187,6 +187,7 @@ $result = mysqli_query($conn, $sql);
             flex: 1 1 calc(16.66% - 10px); /* Tính toán chiều rộng của cột */
             text-align: center;
             margin-bottom: 10px; /* Khoảng cách giữa các hàng khi xuống dòng */
+            border-radius:10px;
         }
         .column a {
             display: block;

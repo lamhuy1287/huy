@@ -9,13 +9,12 @@ $port = 3306;
 // Create connection
 $conn = new mysqli($servername, $username, $password,$db_name,$port);
 // print_r($_SESSION['cart']);exit;
-if(isset($_SESSION['cart'])){
-$array_keys = array_keys($_SESSION['cart']);
-$max = count($array_keys);
-}
-else{
-//   echo "Chưa có sản phẩm nào trong giỏ";
-    // exit;
+if (!isset($_SESSION['cart'])) {
+    $_SESSION['cart'] = array();
+    $max = 0;
+} else {
+    $array_keys = array_keys($_SESSION['cart']);
+    $max = count($array_keys);
 }
 
       
@@ -354,7 +353,7 @@ else{
     </div>
 
     <h2 style="text-align:center;">- My bag -</h2>
-    <main class="container mt-5">
+<main class="container mt-5">
 
         <div class="left">
             <div class="left_1">
@@ -381,9 +380,10 @@ if (empty($max)) {
 $total = 0; // Biến để lưu trữ tổng số tiền
 
 for ($i = 0; $i < $max; $i++) {
-    $sql = "SELECT * FROM products WHERE id=$array_keys[$i];";
-    
-    $result = $conn->query($sql);
+    $stmt = $conn->prepare("SELECT * FROM products WHERE id = ?");
+    $stmt->bind_param("i", $array_keys[$i]);
+    $stmt->execute();
+    $result = $stmt->get_result();
     if ($result === false) {
         //  echo "<tr><td colspan='9'>Error: " . $conn->error . "</td></tr>";
         continue;
@@ -441,7 +441,6 @@ for ($i = 0; $i < $max; $i++) {
                 <h4>
                     <?php 
                echo " $total $  ";
-               echo "<h1>&#129313</h1>";
                ?>
                 </h4>
                 <hr>
@@ -453,7 +452,7 @@ for ($i = 0; $i < $max; $i++) {
                     </script>
             </div>
         </div>
-    </main>
+</main>
 
     </div>
     <div class="End">
