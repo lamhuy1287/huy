@@ -406,7 +406,12 @@ for ($i = 0; $i < $max; $i++) {
                        
                         <?php
                         echo "<span id='minus'>";
+                        
+                            if(isset($_SESSION['cart'][$array_keys[$i]])){
                             echo $_SESSION['cart'][$array_keys[$i]];
+                            }
+                           
+                            
                         echo "</span>";
                         ?>
                         <a class="fa-solid fa-plus"
@@ -466,7 +471,12 @@ for ($i = 0; $i < $max; $i++) {
         let quantity = parseInt(number);
         // alert(quantity);
         if(quantity === 1){
-            confirm("Bạn chắc chắn muốn xóa sản phẩm này???");
+            if(confirm("Bạn chắc chắn muốn xóa sản phẩm này???")){
+                document.getElementById('minus').innerHTML = "xoa";
+            }
+            else{
+                document.getElementById('minus').innerHTML = 1;
+            };
         }
 
     }
