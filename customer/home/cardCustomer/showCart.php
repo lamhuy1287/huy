@@ -452,7 +452,7 @@ for ($i = 0; $i < $max; $i++) {
                 <button type="submit" id="checkout" class="orange-button mb-4">Check out</button>
                 <script>
                     document.getElementById("checkout").onclick = function () {
-                        location.href = "checkout.php";
+                        location.href = "customer_info.php";
                     };
                     </script>
             </div>
@@ -460,16 +460,7 @@ for ($i = 0; $i < $max; $i++) {
 </main>
 
     </div>
-    <div class="End">
-        <p style="margin-left: 30px;margin-right: 30px;text-align: center;justify-content: center;">Welcome to the
-            Official LEGO® Shop, the amazing home of LEGO building toys, gifts, stunning display sets and more for kids
-            and adults alike. Find the perfect gift for toddlers, kids, teens and adults for birthdays or other
-            occasions such as Valentine's Day, Mother's Day and Father's Day. We make it easy to shop for toys that will
-            provide hours of fun and imaginative play. You’ll also find curated LEGO sets for adults perfectly matching
-            their interests, such as cars, flowers, gaming and much more!
-        </p>
-    </div>
-    <br>
+  <br>
     <script>
     
     function minus(){
