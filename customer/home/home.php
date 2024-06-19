@@ -187,7 +187,6 @@ $result = mysqli_query($conn, $sql);
             flex: 1 1 calc(16.66% - 10px); /* Tính toán chiều rộng của cột */
             text-align: center;
             margin-bottom: 10px; /* Khoảng cách giữa các hàng khi xuống dòng */
-            border-radius:10px;
         }
         .column a {
             display: block;
@@ -288,9 +287,6 @@ $result = mysqli_query($conn, $sql);
                 width: calc(50% - 16px);
                 /* 2 products in a row */
             }
-            .text-container {
-    font-size: 1.2rem;
-  }
         }
 
         @media (max-width: 576px) {
@@ -298,9 +294,6 @@ $result = mysqli_query($conn, $sql);
                 width: 100%;
                 /* 1 product in a row */
             }
-            .text-container {
-    font-size: 1rem;
-  }
         }
 
         .container_1 {
@@ -360,7 +353,6 @@ $result = mysqli_query($conn, $sql);
             text-align: center;
             width: 100%;
             /* Đảm bảo văn bản nằm giữa ngang */
-            font-size: 1.5rem; /* initial font size */
         }
 
         .text-container h3 {

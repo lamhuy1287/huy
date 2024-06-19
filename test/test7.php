@@ -181,6 +181,58 @@ else{
             }
         }
 
+        .container {
+            display: flex;
+        }
+
+        .left {
+            width: 70%;
+            background-color: lightblue;
+            /* màu nền để dễ phân biệt */
+        }
+
+        hr {
+            border: 1px solid black;
+        }
+
+        .right {
+            width: 30%;
+            margin-left: 3%;
+        }
+
+        .right_1 {
+            text-align: center;
+            height: auto;
+            border: 1px solid black;
+        }
+
+        .orange-button {
+            width: 90%;
+            background-color: orange;
+            border: 1px solid orange;
+            color: white;
+            padding: 8px 12px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 10px 0;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .orange-button:hover {
+            background-color: white;
+            color: orange;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
 
         .End {
             display: flex;
@@ -282,6 +334,75 @@ else{
         </div>
     </div>
 
+    <h2 style="text-align:center;">My bag (In ra số sản phẩm trong giỏ hàng)</h2>
+    <main class="container mt-5">
+
+        <div class="left">
+            <div class="left_1">
+                <table>
+                    <tr>
+                        <th>Image</th>
+                        <th>Name Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                    </tr>
+                    <?php
+if ($max == 1) {
+    echo "Giỏ hàng hiện chưa có gì??? Bạn hãy đi lựa chọn sản phẩm phù hợp nào";
+}
+
+for ($i = 0; $i < $max; $i++) {
+    $sql = "SELECT * FROM products WHERE id=$array_keys[$i];";
+    
+    $result = $conn->query($sql);
+    if ($result === false) {
+        //  echo "<tr><td colspan='9'>Error: " . $conn->error . "</td></tr>";
+        continue;
+    }
+    
+    if ($result->num_rows > 0) {
+        // output data of each row
+        while ($row = $result->fetch_assoc()) {
+            echo "<tr>";
+            ?>
+
+                    <td><img height='100px;' src="../<?php echo $row['image'] ?>" alt="no image"></td>
+                    <td>
+                        <?php echo $row['name'] ?>
+                    </td>
+                    <td>
+                        <?php echo $row['price'] ?>
+                    </td>
+                    <td>
+                        <a class="fa-solid fa-plus"
+                            href='processAddToCard.php?status=plus&id=<?php echo $array_keys[$i]; ?>'></a>
+                        <?php echo $_SESSION['cart'][$array_keys[$i]] ?>
+                        <a class="fa-solid fa-minus"
+                            href='processAddToCard.php?status=minus&id=<?php echo $array_keys[$i]; ?>'></a>
+                    </td>
+                    <td>
+                        <?php echo $row['price'] * $_SESSION['cart'][$array_keys[$i]] ?>
+                    </td>
+                    <?php
+            echo "</tr>";
+        }
+    }
+}
+?>
+
+                </table>
+            </div>
+        </div>
+        <div class="right">
+            <div class="right_1">
+                <h3>Tổng giá trị đơn hàng :</h3>
+                <br>
+                <h4>In ra số tiền tổng</h4>
+                <hr>
+                <button type="submit" class="orange-button mb-4">Thanh toán</button>
+            </div>
+        </div>
     </main>
 
     </div>

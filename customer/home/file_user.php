@@ -322,6 +322,7 @@ $row = mysqli_fetch_assoc($result);
     <div class="left">
         <div id="d1"><button onclick="showDiv(1)">Thông tin khách hàng</button></div>      
         <div id="d2"><button onclick="showDiv(2)">Chỉnh sửa thông tin</button></div>
+        <form action='../order_customer/all_orders.php'><div id="d3"><button>Hóa đơn</button></div></form>
         <form action='../../admin/login_logout/logout.php'><div id="d3"><button>Đăng xuất</button></div></form>
     </div>
     <div class="center"></div>

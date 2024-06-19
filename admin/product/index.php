@@ -73,6 +73,12 @@ $result = mysqli_query($conn, $sql);
         </a>
       </li>
       <li>
+        <a href="../../admin/all_orders/manager_orders_customer.php" class="nav-link text-black">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
+          Tất cả hóa đơn 
+        </a>
+      </li>
+      <li>
         <a href="../../admin/login_logout/logout.php" class="nav-link text-black">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
           Log out

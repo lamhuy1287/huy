@@ -9,12 +9,14 @@ $port = 3306;
 // Create connection
 $conn = new mysqli($servername, $username, $password,$db_name,$port);
 // print_r($_SESSION['cart']);exit;
-if (!isset($_SESSION['cart'])) {
-    $_SESSION['cart'] = array();
-    $max = 0;
-} else {
-    $array_keys = array_keys($_SESSION['cart']);
-    $max = count($array_keys);
+if(isset($_SESSION['cart'])){
+$array_keys = array_keys($_SESSION['cart']);
+$_SESSION['product_id'] = $array_keys;
+$max = count($array_keys);
+}
+else{
+//   echo "Chưa có sản phẩm nào trong giỏ";
+    // exit;
 }
 
       
@@ -35,12 +37,12 @@ if (!isset($_SESSION['cart'])) {
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
+    
     <style>
         * {
             box-sizing: border-box;
         }
-
+        
 
         .header {
             height: 130px;
@@ -227,24 +229,22 @@ if (!isset($_SESSION['cart'])) {
             background-color: white;
             color: orange;
         }
-
-        table {
-            width: 100%;
+        table{
+          width: 100%;
         }
-
+        
 
         table,
         th,
         td {
-            text-align: center;
+          text-align:center;
             border: 1px solid black;
             border-collapse: collapse;
-
+            
         }
-
-        td img {
-            margin-top: 5px;
-            margin-bottom: 5px;
+        td img{
+          margin-top:5px;
+          margin-bottom:5px;
         }
 
         .End {
@@ -309,7 +309,7 @@ if (!isset($_SESSION['cart'])) {
         </div>
         <div class="header_2">
             <div class="b1">
-                <img id="home_1" style="justify-content: center;" height="80px" width="80px" src="../logo.png" alt="">
+            <img id="home_1" style="justify-content: center;" height="80px" width="80px" src="../logo.png" alt="">
                 <script>
                     document.getElementById("home_1").onclick = function () {
                         location.href = "../home.php";
@@ -353,7 +353,7 @@ if (!isset($_SESSION['cart'])) {
     </div>
 
     <h2 style="text-align:center;">- My bag -</h2>
-<main class="container mt-5">
+    <main class="container mt-5">
 
         <div class="left">
             <div class="left_1">
@@ -362,8 +362,8 @@ if (!isset($_SESSION['cart'])) {
 if (empty($max)) {
     // echo "Giỏ hàng hiện chưa có gì??? Bạn hãy đi lựa chọn sản phẩm phù hợp nào";
     ?>
-                <h1>Mau đi mua hàng đi giỏ hàng méo có gì</h1>
-                <?php
+    <h1>Mau đi mua hàng đi giỏ hàng méo có gì</h1>
+    <?php
     exit;   
 }
                 ?>
@@ -380,10 +380,9 @@ if (empty($max)) {
 $total = 0; // Biến để lưu trữ tổng số tiền
 
 for ($i = 0; $i < $max; $i++) {
-    $stmt = $conn->prepare("SELECT * FROM products WHERE id = ?");
-    $stmt->bind_param("i", $array_keys[$i]);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    $sql = "SELECT * FROM products WHERE id=$array_keys[$i];";
+    
+    $result = $conn->query($sql);
     if ($result === false) {
         //  echo "<tr><td colspan='9'>Error: " . $conn->error . "</td></tr>";
         continue;
@@ -403,21 +402,16 @@ for ($i = 0; $i < $max; $i++) {
                         <?php echo "<p class='price'>".$row['price']."$</p>";  ?>
                     </td>
                     <td>
-                        <a class="fa-solid fa-minus" onclick="minus()"
-                            href='processAddToCard.php?status=minus&id=<?php echo $array_keys[$i]; ?>'></a>
-
+                        <a class="fa-solid fa-minus" 
+                        onclick="minus()"    href='processAddToCard.php?status=minus&id=<?php echo $array_keys[$i]; ?>'></a>
+                       
                         <?php
                         echo "<span id='minus'>";
-                        
-                            if(isset($_SESSION['cart'][$array_keys[$i]])){
                             echo $_SESSION['cart'][$array_keys[$i]];
-                            }
-                           
-                            
                         echo "</span>";
                         ?>
                         <a class="fa-solid fa-plus"
-                            href='processAddToCard.php?status=plus&id=<?php echo $array_keys[$i]; ?>'></a>
+                             href='processAddToCard.php?status=plus&id=<?php echo $array_keys[$i]; ?>'></a>
                     </td>
                     <td>
                         <?php echo "<p class='price'>". $row['price'] * $_SESSION['cart'][$array_keys[$i]]."$</p>"; ?>
@@ -440,27 +434,32 @@ for ($i = 0; $i < $max; $i++) {
         </div>
         <div class="right">
             <div class="right_1">
-
+          
                 <h3>Total order value :</h3>
                 <br>
                 <h4>
-                    <?php 
+               <?php 
+                $_SESSION['total'] = $total; 
                echo " $total $  ";
                ?>
                 </h4>
                 <hr>
-                <button type="submit" id="checkout" class="orange-button mb-4">Check out</button>
-                <script>
-                    document.getElementById("checkout").onclick = function () {
-                        location.href = "customer_info.php";
-                    };
-                    </script>
+                <form action='customer_info.php'><button type="submit" class="orange-button mb-4">Check out</button></form>
             </div>
         </div>
-</main>
+    </main>
 
     </div>
-  <br>
+    <div class="End">
+        <p style="margin-left: 30px;margin-right: 30px;text-align: center;justify-content: center;">Welcome to the
+            Official LEGO® Shop, the amazing home of LEGO building toys, gifts, stunning display sets and more for kids
+            and adults alike. Find the perfect gift for toddlers, kids, teens and adults for birthdays or other
+            occasions such as Valentine's Day, Mother's Day and Father's Day. We make it easy to shop for toys that will
+            provide hours of fun and imaginative play. You’ll also find curated LEGO sets for adults perfectly matching
+            their interests, such as cars, flowers, gaming and much more!
+        </p>
+    </div>
+    <br>
     <script>
     
     function minus(){
@@ -469,49 +468,42 @@ for ($i = 0; $i < $max; $i++) {
         let quantity = parseInt(number);
         // alert(quantity);
         if(quantity === 1){
-            if(confirm("Bạn chắc chắn muốn xóa sản phẩm này???")){
-                document.getElementById('minus').innerHTML = 0;
-            }
-            else{
-                document.getElementById('minus').innerHTML = 1;
-            };
-
+            confirm("Bạn chắc chắn muốn xóa sản phẩm này???");
         }
+
     }
-    </script>
+</script>
+</body>
+<div class="footer">
+    <hr style="border:1px solid black;">
+    <br>
+    <div class="container" style="background-color:white;row row-cols-3">
+        <div class="row w-100">
+            <div class="col">
 
-    <div class="footer">
-        <hr style="border:1px solid black;">
-        <br>
-        <div class="container" style="background-color:white;row row-cols-3">
-            <div class="row w-100">
-                <div class="col">
-
-                    <h3>Liên hệ</h3>
-                    <p>Địa chỉ:Phú Diễn , Bắc Từ Liêm ,Hà Nội</p>
-                    <p>Email: lamhuy26@gmail.com</p>
-                    <p>Điện thoại: 0377006359</p>
-                </div>
-                <div class="col">
-                    <h3>Liên kết</h3>
-                    <ul>
-                        <li><a href="home.php">Trang chủ</a></li>
-                        <li><a href="new.php">Sản phẩm</a></li>
-                        <li><a href="https://www.messenger.com/e2ee/t/6948976355124079">Liên hệ hỗ trợ</a></li>
-                        <!-- Thêm các liên kết khác -->
-                    </ul>
-                </div>
-                <div class="col">
-                    <h3>Bản đồ</h3>
-                    <div>
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14894.008647910136!2d105.75368688691543!3d21.052596739639352!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313454dc9b34f767%3A0xd6b847b3f4d5a4a0!2zUGjDuiBEaeG7hW4sIELhuq9jIFThu6sgTGnDqm0sIEjDoCBO4buZaSwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1711990425983!5m2!1svi!2s"
-                            width="300" height="200" style="border:0;" allowfullscreen="" loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    </div>
+                <h3>Liên hệ</h3>
+                <p>Địa chỉ:Phú Diễn , Bắc Từ Liêm ,Hà Nội</p>
+                <p>Email: lamhuy26@gmail.com</p>
+                <p>Điện thoại: 0377006359</p>
+            </div>
+            <div class="col">
+                <h3>Liên kết</h3>
+                <ul>
+                    <li><a href="home.php">Trang chủ</a></li>
+                    <li><a href="new.php">Sản phẩm</a></li>
+                    <li><a href="https://www.messenger.com/e2ee/t/6948976355124079">Liên hệ hỗ trợ</a></li>
+                    <!-- Thêm các liên kết khác -->
+                </ul>
+            </div>
+            <div class="col">
+                <h3>Bản đồ</h3>
+                <div>
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14894.008647910136!2d105.75368688691543!3d21.052596739639352!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313454dc9b34f767%3A0xd6b847b3f4d5a4a0!2zUGjDuiBEaeG7hW4sIELhuq9jIFThu6sgTGnDqm0sIEjDoCBO4buZaSwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1711990425983!5m2!1svi!2s"
+                        width="300" height="200" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
         </div>
-</body>
 
 </html>
