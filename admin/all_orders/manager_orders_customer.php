@@ -97,7 +97,7 @@ $result = $conn->query($sql);
                     echo "</tr>";
                 }
               } else {
-                echo "0 results";
+                echo "<p>"."Hiện tại chưa có hóa đơn nào được đặt"."</p>";
               }
 
         ?>
